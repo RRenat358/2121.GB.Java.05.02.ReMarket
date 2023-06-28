@@ -60,6 +60,17 @@ public class Cart {
         recalculate();
     }
 
+    public void clear() {
+        itemList.clear();
+        totalPrice = 0;
+    }
+
+    private void recalculate() {
+        totalPrice = 0;
+        for (CartItem cartItem : itemList) {
+            totalPrice += cartItem.getPrice();
+        }
+    }
 
     public void merge(Cart another) {
         for (CartItem anotherItem : another.itemList) {
@@ -81,18 +92,8 @@ public class Cart {
 
 
 
-    private void recalculate() {
-        totalPrice = 0;
-        for (CartItem cartItem : itemList) {
-            totalPrice += cartItem.getPrice();
-        }
-    }
 
 
-    public void clear() {
-        itemList.clear();
-        totalPrice = 0;
-    }
 
 
 }
