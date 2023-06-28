@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @Component
 public class CartConverter {
     public CartDto modelToDto(Cart cart) {
-        List<CartItemDto> cartItemDtos = cart.getItemList().stream().map(it ->
+        List<CartItemDto> cartItemDtos = cart.getItems().stream().map(it ->
                 new CartItemDto(it.getProductId(), it.getProductTitle(), it.getQuantity(), it.getPricePerProduct(), it.getPrice())
         ).collect(Collectors.toList());
         CartDto cartDto = new CartDto(cartItemDtos, cart.getTotalPrice());

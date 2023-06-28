@@ -25,7 +25,6 @@ create table products (
     calories            varchar(255),
     group_product       varchar(255),
     price               int,
-
     created_at          timestamp default current_timestamp,
     updated_at          timestamp default current_timestamp
                       );
