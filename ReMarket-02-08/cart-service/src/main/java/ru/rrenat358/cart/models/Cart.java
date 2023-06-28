@@ -10,27 +10,25 @@ import java.util.List;
 @Data
 public class Cart {
 
-    private List<CartItem> itemList;
+    private List<CartItem> items;
     private int totalPrice;
 
     public Cart() {
-        this.itemList = new ArrayList<>();
+        this.items = new ArrayList<>();
     }
 
-
-    public void addProduct(ProductDto productDto) {
-        if (addProduct(productDto.getId())) {
+    public void add(ProductDto productDto) {
+        if (add(productDto.getId())) {
             return;
         }
-        itemList.add(new CartItem(productDto));
+        items.add(new CartItem(productDto));
         recalculate();
     }
 
-
-    public boolean addProduct(Long id) {
-        for (CartItem cartItem : itemList) {
-            if (cartItem.getProductId().equals(id)) {
-                cartItem.changeQuantity(+1);
+    public boolean add(Long id) {
+        for (CartItem o : items) {
+            if (o.getProductId().equals(id)) {
+                o.changeQuantity(+1);
                 recalculate();
                 return true;
             }
@@ -38,9 +36,8 @@ public class Cart {
         return false;
     }
 
-
     public void decrementProduct(Long id) {
-        Iterator<CartItem> iter = itemList.iterator();
+        Iterator<CartItem> iter = items.iterator();
         while (iter.hasNext()) {
             CartItem cartItem = iter.next();
             if (cartItem.getProductId().equals(id)) {
@@ -54,28 +51,27 @@ public class Cart {
         }
     }
 
-
     public void removeProduct(Long id) {
-        itemList.removeIf(orderItemDto -> orderItemDto.getProductId().equals(id));
+        items.removeIf(o -> o.getProductId().equals(id));
         recalculate();
     }
 
     public void clear() {
-        itemList.clear();
+        items.clear();
         totalPrice = 0;
     }
 
     private void recalculate() {
         totalPrice = 0;
-        for (CartItem cartItem : itemList) {
-            totalPrice += cartItem.getPrice();
+        for (CartItem o : items) {
+            totalPrice += o.getPrice();
         }
     }
 
     public void merge(Cart another) {
-        for (CartItem anotherItem : another.itemList) {
+        for (CartItem anotherItem : another.items) {
             boolean merged = false;
-            for (CartItem myItem : itemList) {
+            for (CartItem myItem : items) {
                 if (myItem.getProductId().equals(anotherItem.getProductId())) {
                     myItem.changeQuantity(anotherItem.getQuantity());
                     merged = true;
@@ -83,16 +79,12 @@ public class Cart {
                 }
             }
             if (!merged) {
-                itemList.add(anotherItem);
+                items.add(anotherItem);
             }
         }
         recalculate();
         another.clear();
     }
-
-
-
-
 
 
 
