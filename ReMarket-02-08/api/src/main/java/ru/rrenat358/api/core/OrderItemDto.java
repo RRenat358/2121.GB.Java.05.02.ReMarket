@@ -1,8 +1,6 @@
 package ru.rrenat358.api.core;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.math.BigDecimal;
 
 //@Data
 //@NoArgsConstructor
@@ -12,8 +10,8 @@ public class OrderItemDto {
     private Long productId;
     private String productTitle;
     private int quantity;
-    private int pricePerProduct;
-    private int price;
+    private BigDecimal pricePerProduct;
+    private BigDecimal price;
 
 
     public Long getProductId() {
@@ -40,26 +38,26 @@ public class OrderItemDto {
         this.quantity = quantity;
     }
 
-    public int getPricePerProduct() {
+    public BigDecimal getPricePerProduct() {
         return pricePerProduct;
     }
 
-    public void setPricePerProduct(int pricePerProduct) {
+    public void setPricePerProduct(BigDecimal pricePerProduct) {
         this.pricePerProduct = pricePerProduct;
     }
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
     public OrderItemDto() {
     }
 
-    public OrderItemDto(Long productId, String productTitle, int quantity, int pricePerProduct, int price) {
+    public OrderItemDto(Long productId, String productTitle, int quantity, BigDecimal pricePerProduct, BigDecimal price) {
         this.productId = productId;
         this.productTitle = productTitle;
         this.quantity = quantity;

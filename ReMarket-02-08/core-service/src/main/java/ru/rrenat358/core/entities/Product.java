@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -25,11 +26,8 @@ public class Product {
     @Column(name = "title")
     private String title;
 
-
     @Column(name = "price")
-    private Integer price;
-
-
+    private BigDecimal price;
 
     @Column(name = "proteins")
     private String proteins;
@@ -43,7 +41,7 @@ public class Product {
     @Column(name = "calories")
     private String calories;
 
-    //todo хранить в БД  со @OneToMany/@ManyToOne
+//    todo хранить в БД  со @OneToMany/@ManyToOne
     @Column(name = "group_product")
     private String groupProduct;
 
@@ -57,14 +55,11 @@ public class Product {
     private LocalDateTime updatedAt;
 
 
-
-    public Product(Long id, String title, Integer price) {
+    public Product(Long id, String title, BigDecimal price) {
         this.id = id;
         this.title = title;
         this.price = price;
     }
-
-
 
 
 
