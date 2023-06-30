@@ -1,5 +1,10 @@
 package ru.rrenat358.core.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +29,15 @@ public class ProductsController {
     //============================================================
     // GET
 
-
+    @Operation(
+            summary = "Запрос на получение страницы продуктов",
+            responses = {
+                    @ApiResponse(
+                            description = "Успешный ответ", responseCode = "200",
+                            content = @Content(schema = @Schema(implementation = Page.class))
+                    )
+            }
+    )
     @GetMapping
     public Page<ProductDto> findByFilter(
             @RequestParam(name = "p", defaultValue = "1") Integer page,
@@ -41,8 +54,17 @@ public class ProductsController {
     }
 
 
+    @Operation(
+            summary = "Запрос на получение продукта по id",
+            responses = {
+                    @ApiResponse(
+                            description = "Успешный ответ", responseCode = "200",
+                            content = @Content(schema = @Schema(implementation = ProductDto.class))
+                    )
+            }
+    )
     @GetMapping("/{id}")
-    public ProductDto findById(@PathVariable Long id) {
+    public ProductDto findById(@PathVariable @Parameter(description = "Идентификатор продукта", required = true) Long id) {
         Product product = productsService.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Продукт не найден для ID : " + id));
         return productConverter.entityToDto(product);
