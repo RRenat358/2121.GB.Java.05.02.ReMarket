@@ -18,6 +18,7 @@
 ==============================
 20230629 = w = V1__init.sql → price == numeric(8,2)
 20230629 = w = change price from int to BigDecimal
+20230630 = o = add swagger in ProductsController
 
 
 
