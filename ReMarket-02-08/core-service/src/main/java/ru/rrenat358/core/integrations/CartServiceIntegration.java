@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import ru.rrenat358.api.carts.CartDto;
+import ru.rrenat358.api.exceptions.CartServiceAppError;
 import ru.rrenat358.core.exceptions.CartServiceIntegrationException;
 
 @Component

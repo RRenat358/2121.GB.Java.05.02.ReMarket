@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import ru.rrenat358.api.exceptions.AppError;
+import ru.rrenat358.api.exceptions.CartServiceAppError;
 import ru.rrenat358.api.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice
