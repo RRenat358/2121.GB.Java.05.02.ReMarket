@@ -12,6 +12,7 @@ import ru.rrenat358.api.exceptions.ResourceNotFoundException;
 @Slf4j
 public class GlobalExceptionHandler {
 
+/*
     @ExceptionHandler
     public ResponseEntity<AppError> catchResourceNotFoundException(ResourceNotFoundException resourceNotFoundException) {
         log.error(resourceNotFoundException.getMessage(), resourceNotFoundException);
@@ -28,5 +29,24 @@ public class GlobalExceptionHandler {
                 fieldValidationException.getErrorMessages()),
                 HttpStatus.BAD_REQUEST);
     }
+*/
 
+
+@ExceptionHandler
+public ResponseEntity<AppError> catchResourceNotFoundException(ResourceNotFoundException e) {
+    log.error(e.getMessage(), e);
+    return new ResponseEntity<>(new AppError("RESOURCE_NOT_FOUND_EXCEPTION", e.getMessage()), HttpStatus.NOT_FOUND);
+}
+
+    @ExceptionHandler
+    public ResponseEntity<AppError> catchCartServiceIntegrationException(CartServiceIntegrationException e) {
+        log.error(e.getMessage(), e);
+        return new ResponseEntity<>(new AppError("CART_SERVICE_INTEGRATION_ERROR", e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<FieldsValidationError> catchValidationException(FieldValidationException e) {
+        log.error(e.getMessage(), e);
+        return new ResponseEntity<>(new FieldsValidationError(e.getErrorMessages()), HttpStatus.BAD_REQUEST);
+    }
 }
