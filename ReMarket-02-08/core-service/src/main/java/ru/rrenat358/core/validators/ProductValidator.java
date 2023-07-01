@@ -16,7 +16,8 @@ public class ProductValidator {
 
         List<String> errorMessages = new ArrayList<>();
 
-        if (productDto.getTitle().trim().isEmpty()) {
+        //todo !null
+        if (productDto.getTitle().isBlank()) {
             errorMessages.add("Имя отсутствует !!!");
         }
 //        if (productDto.getPrice() < 0) {
