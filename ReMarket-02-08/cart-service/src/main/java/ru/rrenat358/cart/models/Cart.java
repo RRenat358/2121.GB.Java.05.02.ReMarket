@@ -3,6 +3,7 @@ package ru.rrenat358.cart.models;
 import lombok.Data;
 import ru.rrenat358.api.core.ProductDto;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 public class Cart {
 
     private List<CartItem> items;
-    private int totalPrice;
+    private BigDecimal totalPrice;
 
     public Cart() {
         this.items = new ArrayList<>();
@@ -58,13 +59,13 @@ public class Cart {
 
     public void clear() {
         items.clear();
-        totalPrice = 0;
+        totalPrice = BigDecimal.ZERO;
     }
 
     private void recalculate() {
-        totalPrice = 0;
+        totalPrice = BigDecimal.ZERO;
         for (CartItem o : items) {
-            totalPrice += o.getPrice();
+            totalPrice = totalPrice.add(o.getPrice());
         }
     }
 
