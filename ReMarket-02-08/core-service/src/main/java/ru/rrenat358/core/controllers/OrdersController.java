@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.rrenat358.api.core.OrderDetailsDto;
 import ru.rrenat358.api.core.OrderDto;
+import ru.rrenat358.api.exceptions.ResourceNotFoundException;
 import ru.rrenat358.core.converters.OrderConverter;
 import ru.rrenat358.core.entities.Order;
 import ru.rrenat358.core.services.OrderService;
@@ -44,6 +45,11 @@ public class OrdersController {
 //        List<OrderDto> orderDtoList = orderService.getAllOrdersByCurrentUser(userName).stream()
 //                .map(orderConverter::entityToDto).collect(Collectors.toList());
         return orderDtoList;
+    }
+
+    @GetMapping("/{id}")
+    public OrderDto getOrderById(@PathVariable Long id) {
+        return orderConverter.entityToDto(orderService.findById(id).orElseThrow(() -> new ResourceNotFoundException("ORDER 404")));
     }
 
 
