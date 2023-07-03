@@ -20,5 +20,4 @@ public class ProductsSpecifications {
     public static Specification<Product> groupLike(String groupPart) {
         return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.like(root.get("groupProduct"), String.format("%%%s%%", groupPart));
     }
-
 }

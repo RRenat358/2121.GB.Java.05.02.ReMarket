@@ -11,16 +11,6 @@ angular.module('market-front').controller('cartController', function ($scope, $h
         });
     };
 
-/*
-    $scope.loadCart = function () {
-        $http.get('http://localhost:8189/app/api/v1/cart')
-            .then(function (response) {
-                $scope.Cart = response.data;
-            });
-    }
-*/
-
-
     $scope.disabledCheckOut = function () {
         alert("Для оформления заказа необходимо войти в учётную запись");
     }

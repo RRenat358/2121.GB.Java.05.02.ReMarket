@@ -1,12 +1,5 @@
 package ru.rrenat358.api.core;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
 public class ProfileDto {
     private String username;
 //    private String password;
@@ -29,6 +22,4 @@ public class ProfileDto {
     public ProfileDto(String username) {
         this.username = username;
     }
-
-
 }

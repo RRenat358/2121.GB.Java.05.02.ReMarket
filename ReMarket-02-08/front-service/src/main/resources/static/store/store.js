@@ -91,24 +91,12 @@ angular.module('market-front').controller('storeController', function ($scope, $
             });
     }
 
-
-
-
-
-
     //============================================================
     $scope.addToCart = function (id) {
         $http.get(pathToCart + '/api/v1/cart/' + $localStorage.springWebGuestCartId + '/add/' + id)
             .then(function (response) {
             });
     }
-
-    // $scope.addToCart = function (productId) {
-    //     $http.get(contextPath + '/api/v1/cart/add/' + productId)
-    //         .then(function (response) {
-    //         });
-    // }
-
 
     $scope.loadProducts();
 });

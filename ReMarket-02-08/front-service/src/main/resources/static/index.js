@@ -23,6 +23,10 @@
                 templateUrl: 'orders/orders.html',
                 controller: 'ordersController'
             })
+            .when('/order_pay/:orderId', {
+                templateUrl: 'order_pay/order_pay.html',
+                controller: 'orderPayController'
+            })
             .otherwise({
                 redirectTo: '/'
             });
@@ -62,7 +66,7 @@
 
 //============================================================
 //============================================================
-angular.module('market-front').controller('indexController', function ($scope, $rootScope, $http, $location, $localStorage) {
+angular.module('market-front').controller('indexController', function ($rootScope, $scope, $http, $location, $localStorage) {
     // const contextPath = 'http://localhost:8189/app/api/v1/';
 
 
