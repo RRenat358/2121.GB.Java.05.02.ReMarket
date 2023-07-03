@@ -25,6 +25,6 @@
 ==============================
 20230703 = o = paypal
 20230703 = e = ошибка при отправке запроса на оплату = https://developer.paypal.com/docs/api/orders/v2/#error-ITEM_TOTAL_MISMATCH
-20230703 = o =
+20230703 = o = add @SpringBootTest == CartServiceTest
 
 
