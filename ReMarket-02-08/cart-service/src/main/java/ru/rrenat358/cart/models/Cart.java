@@ -37,11 +37,11 @@ public class Cart {
         return false;
     }
 
-    public void decrementProduct(Long id) {
+    public void decrementProduct(Long productId) {
         Iterator<CartItem> iter = items.iterator();
         while (iter.hasNext()) {
             CartItem cartItem = iter.next();
-            if (cartItem.getProductId().equals(id)) {
+            if (cartItem.getProductId().equals(productId)) {
                 cartItem.changeQuantity(-1);
                 if (cartItem.getQuantity() <= 0) {
                     iter.remove();
@@ -52,8 +52,8 @@ public class Cart {
         }
     }
 
-    public void removeProduct(Long id) {
-        items.removeIf(o -> o.getProductId().equals(id));
+    public void removeProduct(Long productId) {
+        items.removeIf(o -> o.getProductId().equals(productId));
         recalculate();
     }
 

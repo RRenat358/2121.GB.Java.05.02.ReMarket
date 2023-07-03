@@ -11,6 +11,7 @@ import ru.rrenat358.core.integrations.CartServiceIntegration;
 import ru.rrenat358.core.repositories.OrdersRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -58,6 +59,9 @@ public class OrderService {
         return ordersRepository.findAllOrdersByUsername(username);
     }
 
+    public Optional<Order> findById(Long id) {
+        return ordersRepository.findById(id);
+    }
 
 
 }

@@ -45,7 +45,4 @@ public class AppConfig {
                 .clientConnector(new ReactorClientHttpConnector(HttpClient.from(tcpClient)))
                 .build();
     }
-
-
-
 }
