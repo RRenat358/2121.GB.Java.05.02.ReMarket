@@ -16,7 +16,6 @@ public class CartsController {
     private final CartService cartService;
     private final CartConverter cartConverter;
 
-
     @GetMapping("/{uuid}")
     public CartDto getCart(@RequestHeader(required = false) String username, @PathVariable String uuid) {
         return cartConverter.modelToDto(cartService.getCurrentCart(getCurrentCartUuid(username, uuid)));
@@ -61,8 +60,4 @@ public class CartsController {
         }
         return cartService.getCartUuidFromSuffix(uuid);
     }
-
-
-
-
 }

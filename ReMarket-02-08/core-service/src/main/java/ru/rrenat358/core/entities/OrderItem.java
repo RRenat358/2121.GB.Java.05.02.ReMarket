@@ -1,6 +1,5 @@
 package ru.rrenat358.core.entities;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,8 +16,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderItem {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -32,7 +29,6 @@ public class OrderItem {
     @JoinColumn(name = "order_id")
     private Order order;
 
-
     @Column(name = "quantity")
     private Integer quantity;
 
@@ -42,8 +38,6 @@ public class OrderItem {
     @Column(name = "price")
     private BigDecimal price;
 
-
-
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -51,6 +45,4 @@ public class OrderItem {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
-
 }

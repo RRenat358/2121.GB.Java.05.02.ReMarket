@@ -16,7 +16,6 @@ import java.util.function.Consumer;
 @RequiredArgsConstructor
 public class CartService {
     private final ProductsServiceIntegration productsServiceIntegration;
-
     private final RedisTemplate<String, Object> redisTemplate;
 
     @Value("${utils.cart.prefix}")
@@ -73,8 +72,4 @@ public class CartService {
     public void updateCart(String cartKey, Cart cart) {
         redisTemplate.opsForValue().set(cartKey, cart);
     }
-
-
-
-
 }

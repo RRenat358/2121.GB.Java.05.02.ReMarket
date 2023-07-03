@@ -2,17 +2,12 @@ package ru.rrenat358.api.core;
 
 import java.math.BigDecimal;
 
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
 public class OrderItemDto {
-
     private Long productId;
     private String productTitle;
     private int quantity;
     private BigDecimal pricePerProduct;
     private BigDecimal price;
-
 
     public Long getProductId() {
         return productId;
@@ -64,7 +59,4 @@ public class OrderItemDto {
         this.pricePerProduct = pricePerProduct;
         this.price = price;
     }
-
-
-
 }

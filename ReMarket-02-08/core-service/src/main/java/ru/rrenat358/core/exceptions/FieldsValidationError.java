@@ -1,6 +1,5 @@
 package ru.rrenat358.core.exceptions;
 
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,5 +15,4 @@ public class FieldsValidationError {
     public FieldsValidationError(List<String> fieldsValidationErrorMessage) {
         this.fieldsValidationErrorMessage = fieldsValidationErrorMessage;
     }
-
 }
