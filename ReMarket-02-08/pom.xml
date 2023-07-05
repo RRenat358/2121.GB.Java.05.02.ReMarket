@@ -22,6 +22,7 @@
         <module>core-service</module>
         <module>front-service</module>
         <module>gateway</module>
+        <module>statistics-service</module>
     </modules>
 
     <properties>
