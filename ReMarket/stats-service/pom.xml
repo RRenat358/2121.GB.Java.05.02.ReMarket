@@ -14,6 +14,12 @@
 
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-redis</artifactId>
@@ -23,6 +29,8 @@
             <artifactId>jedis</artifactId>
             <version>3.6.0</version>
         </dependency>
+
+
         <!--============================================================-->
         <dependency>
             <groupId>ru.rrenat358</groupId>
