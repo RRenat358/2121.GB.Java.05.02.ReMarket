@@ -9,7 +9,9 @@ import ru.rrenat358.api.exceptions.CartServiceAppError;
 import ru.rrenat358.stats.exceptions.CartServiceIntegrationException;
 
 
-//  ПРИМЕР/ШАБЛОН ! ВОЗМОЖНО не понадобится
+    // =======================================
+    //  ПРИМЕР/ШАБЛОН ! пока не используется !
+    // =======================================
 
 @Component
 @RequiredArgsConstructor

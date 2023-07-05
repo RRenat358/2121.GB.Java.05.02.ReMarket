@@ -63,5 +63,9 @@ public class OrderService {
         return ordersRepository.findById(id);
     }
 
+    public Integer getNumberOfOrdersByCurrentUser(String username) {
+        return ordersRepository.getNumberOfOrdersByCurrentUser(username);
+    }
+
 
 }

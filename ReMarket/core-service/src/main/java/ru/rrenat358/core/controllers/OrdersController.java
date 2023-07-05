@@ -44,4 +44,10 @@ public class OrdersController {
     public OrderDto getOrderById(@PathVariable Long id) {
         return orderConverter.entityToDto(orderService.findById(id).orElseThrow(() -> new ResourceNotFoundException("ORDER 404")));
     }
+
+    @GetMapping("/number-of-orders")
+    public Integer getNumberOfOrdersByCurrentUser(@RequestHeader String username) {
+        return orderService.getNumberOfOrdersByCurrentUser(username);
+    }
+
 }
