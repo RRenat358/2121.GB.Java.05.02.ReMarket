@@ -17,7 +17,7 @@ public interface OrdersRepository extends JpaRepository<Order, Long> {
     @Query("SELECT count(*) FROM Order o WHERE o.username = ?1")
     Integer getNumberOfOrdersByCurrentUser(String username);
 
-    Integer getAllByUsernameMatches(String username);
+//    Integer getAllByUsernameMatches(String username);
 
 
 }
