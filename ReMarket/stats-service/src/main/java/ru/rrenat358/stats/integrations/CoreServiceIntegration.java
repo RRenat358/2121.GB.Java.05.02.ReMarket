@@ -59,6 +59,18 @@ public class CoreServiceIntegration {
         return orderDto;
     }
 
+    public Integer getNumberOfOrdersByCurrentUser(String username) {
+        Integer numberOfOrders = coreServiceWebClient.get()
+                .uri("/api/v1/orders/number-of-orders")
+                .header("username", username)
+                .retrieve()
+                .bodyToMono(Integer.class)
+//                .bodyToMono(OrderDto.class)
+                .block();
+
+        return numberOfOrders;
+    }
+
 
 /*
     public CartDto getUserCart(String username) {

@@ -12,13 +12,8 @@ public class OrdersStatsService {
     private final CoreServiceIntegration coreServiceIntegration;
 
 
-    public void allOrders() {
-
-
-
-
-
-
+    public Integer getNumberOfOrdersByCurrentUser(String username) {
+        return coreServiceIntegration.getNumberOfOrdersByCurrentUser(username);
     }
 
 
