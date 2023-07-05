@@ -49,6 +49,7 @@ public class CoreServiceIntegration {
     }
 */
 
+/*
     public OrderDto getOrderById(String username) {
         OrderDto orderDto = coreServiceWebClient.get()
                 .uri("/api/v1/orders/0")
@@ -58,6 +59,7 @@ public class CoreServiceIntegration {
                 .block();
         return orderDto;
     }
+*/
 
     public Integer getNumberOfOrdersByCurrentUser(String username) {
         Integer numberOfOrders = coreServiceWebClient.get()
