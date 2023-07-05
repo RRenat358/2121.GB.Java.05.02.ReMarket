@@ -16,7 +16,6 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
-<!--        <java.version>11</java.version>-->
         <spring-cloud.version>2020.0.4</spring-cloud.version>
     </properties>
 
@@ -50,14 +49,6 @@
             <version>2.3.1</version>
         </dependency>
         <!--============================================================-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-autoconfigure</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot</artifactId>-->
-<!--        </dependency>-->
     </dependencies>
 
     <dependencyManagement>

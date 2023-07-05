@@ -10,14 +10,9 @@
     <artifactId>2121.GB.Java.05.02.ReMarket</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-<!--    <properties>-->
-<!--        <maven.compiler.source>17</maven.compiler.source>-->
-<!--        <maven.compiler.target>17</maven.compiler.target>-->
-<!--        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
-<!--    </properties>-->
 
     <modules>
-        <module>ReMarket-02-08</module>
+        <module>ReMarket</module>
     </modules>
 
 

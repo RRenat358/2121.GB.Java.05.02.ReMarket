@@ -11,7 +11,7 @@
         <relativePath/>
     </parent>
 
-    <artifactId>ReMarket-02-08</artifactId>
+    <artifactId>ReMarket</artifactId>
     <groupId>ru.rrenat358</groupId>
     <version>0.0.1-SNAPSHOT</version>
 

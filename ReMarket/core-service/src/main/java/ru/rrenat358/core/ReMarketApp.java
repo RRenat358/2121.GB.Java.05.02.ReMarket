@@ -6,11 +6,11 @@ import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
 @PropertySource("secret.properties")
-public class ReMarketApp08 {
+public class ReMarketApp {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(ReMarketApp08.class, args);
+        SpringApplication.run(ReMarketApp.class, args);
 
     }
 

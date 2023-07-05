@@ -30,7 +30,7 @@ http://localhost:8189/web-market-core/swagger-ui/index.html
 Для работы подставить свои данные в файлы:   
 
 1--  
-ReMarket-02-08/core-service/src/main/resources/secret.properties  
+ReMarket/core-service/src/main/resources/secret.properties  
 
 `paypal.client-id=  `  
 `paypal.client-secret=  `  
