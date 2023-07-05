@@ -1,0 +1,12 @@
+server:
+  port: 8167
+  servlet:
+    context-path: /web-market-stats
+
+utils:
+  cart:
+    prefix: REMARKET_STATS_
+
+integrations:
+  core-service:
+    url: http://localhost:5555/core
