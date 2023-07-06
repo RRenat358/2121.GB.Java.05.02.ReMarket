@@ -16,6 +16,7 @@ angular.module('market-front').controller('ordersController', function ($scope, 
     }
 
 
+/*
     $scope.loadOrdersStats = function () {
         $http.get(contextPath + '/orders-stats')
             .then(function (response) {
@@ -24,10 +25,22 @@ angular.module('market-front').controller('ordersController', function ($scope, 
                 $scope.OrdersStats = response.data;
             });
     }
+*/
+
+    $scope.loadOrdersStats = function () {
+        $http.get(ordersStatsPath + '/orders-stats/number-of-orders-by-user')
+            .then(function (response) {
+                console.log("===============OrdersStats===============");
+                console.log($scope.OrdersStats);
+                $scope.OrdersStats = response.data;
+                console.log($scope.OrdersStats);
+            });
+    }
 
 
 
 
     $scope.loadOrders();
+    $scope.loadOrdersStats();
 
 });
