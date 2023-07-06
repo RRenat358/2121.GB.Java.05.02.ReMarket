@@ -27,6 +27,10 @@
                 templateUrl: 'order_pay/order_pay.html',
                 controller: 'orderPayController'
             })
+            .when('/stats', {
+                templateUrl: 'stats/stats.html',
+                controller: 'ordersStatsController'
+            })
             .otherwise({
                 redirectTo: '/'
             });
