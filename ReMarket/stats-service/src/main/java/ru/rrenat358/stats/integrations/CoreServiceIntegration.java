@@ -101,6 +101,34 @@ public class CoreServiceIntegration {
         return cart;
     }
 */
+/*
+    public Integer getNumberOfOrdersByCurrentUser(String username) {
+        Integer numberOfOrders = coreServiceWebClient.get()
+                .uri("/api/v1/orders/number-of-orders")
+                .header("username", username)
+                // .bodyValue(body) // for POST
+                .retrieve()
+                .onStatus(
+                        httpStatus -> httpStatus.is4xxClientError(), // HttpStatus::is4xxClientError
+                        clientResponse -> clientResponse.bodyToMono(CartServiceAppError.class).map(
+                                body -> {
+                                    if (body.getCode().equals(CartServiceAppError.CartServiceErrors.CART_NOT_FOUND.name())) {
+                                        return new CoreServiceIntegrationException("Выполнен некорректный запрос к сервису корзин: корзина не найдена");
+                                    }
+                                    if (body.getCode().equals(CartServiceAppError.CartServiceErrors.CART_IS_BROKEN.name())) {
+                                        return new CoreServiceIntegrationException("Выполнен некорректный запрос к сервису корзин: корзина сломана");
+                                    }
+                                    return new CoreServiceIntegrationException("Выполнен некорректный запрос к сервису корзин: причина неизвестна");
+                                }
+                        )
+                )
+//                .onStatus(HttpStatus::is4xxClientError, clientResponse -> Mono.error(new CoreServiceIntegrationException("Выполнен некорректный запрос к сервису корзин")))
+//                .onStatus(HttpStatus::is5xxServerError, clientResponse -> Mono.error(new CoreServiceIntegrationException("Сервис корзин сломался")))
+                .bodyToMono(Integer.class)
+                .block();
+        return numberOfOrders;
+    }
+*/
 
 
 
