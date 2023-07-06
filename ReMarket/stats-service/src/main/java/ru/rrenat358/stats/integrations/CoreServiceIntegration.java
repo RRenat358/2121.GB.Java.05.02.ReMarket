@@ -67,7 +67,6 @@ public class CoreServiceIntegration {
                 .header("username", username)
                 .retrieve()
                 .bodyToMono(Integer.class)
-//                .bodyToMono(OrderDto.class)
                 .block();
 
         return numberOfOrders;
