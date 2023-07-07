@@ -1,6 +1,6 @@
 angular.module('market-front').controller('ordersStatsController', function ($scope, $http, $location) {
     const ordersStatsPath = 'http://localhost:5555/stats/api/v1';
-    const contextPath = 'http://localhost:5555/core/api/v1';
+    // const contextPath = 'http://localhost:5555/core/api/v1';
 
 
 /*
@@ -20,10 +20,17 @@ angular.module('market-front').controller('ordersStatsController', function ($sc
     }
 
 
-    $scope.loadOrders = function () {
-        $http.get(contextPath + '/orders')
+    // $scope.loadOrders = function () {
+    //     $http.get(contextPath + '/orders')
+    //         .then(function (response) {
+    //             $scope.MyOrders = response.data;
+    //         });
+    // }
+
+    $scope.loadAllOrders = function () {
+        $http.get(ordersStatsPath + '/orders-stats/all-orders')
             .then(function (response) {
-                $scope.MyOrders = response.data;
+                $scope.allOrders = response.data;
             });
     }
 
@@ -34,6 +41,6 @@ angular.module('market-front').controller('ordersStatsController', function ($sc
 
 
     $scope.loadOrdersStats();
-    $scope.loadOrders();
+    $scope.loadAllOrders();
 
 });

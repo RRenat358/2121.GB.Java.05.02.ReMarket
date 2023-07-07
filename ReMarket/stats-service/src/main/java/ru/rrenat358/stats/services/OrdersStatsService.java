@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 import ru.rrenat358.api.core.OrderDto;
 import ru.rrenat358.stats.integrations.CoreServiceIntegration;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,11 +26,24 @@ public class OrdersStatsService {
         return coreServiceIntegration.getNumberOfOrdersByCurrentUser(username);
     }
 
+/*
     public List<OrderDto> getAllOrdersByCurrentUser(String username) {
-//        if (username == null || username.isBlank()) {
-////            return null;
-//            return new ArrayList<>();
-//        }
+        if (username == null || username.isBlank()) {
+//            return null;
+            List<OrderDto> orderDtoList = Collections.singletonList(new OrderDto(0L, "[username]", BigDecimal.valueOf(0), "0", "0", null));
+            return orderDtoList;
+        }
+        return coreServiceIntegration.getAllOrdersByCurrentUser(username);
+    }
+*/
+
+
+    public Optional<OrderDto> getAllOrdersByCurrentUser(String username) {
+        if (username == null || username.isBlank()) {
+//            return null;
+            OrderDto orderDtoList = new OrderDto(0L, "[username]", BigDecimal.valueOf(0), "0", "0", null);
+            return Optional.ofNullable(orderDtoList);
+        }
         return coreServiceIntegration.getAllOrdersByCurrentUser(username);
     }
 

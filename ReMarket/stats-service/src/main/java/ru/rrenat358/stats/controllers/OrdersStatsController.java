@@ -9,11 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.rrenat358.api.core.OrderDto;
 import ru.rrenat358.stats.services.OrdersStatsService;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -30,13 +25,7 @@ public class OrdersStatsController {
     }
 
     @GetMapping("/all-orders")
-    public List<OrderDto> getAllOrdersByCurrentUser(@RequestHeader(value = "username", required = false ) String username) {
-        if (username == null || username.isBlank()) {
-//            return null;
-//            return new ArrayList<>();
-            List<OrderDto> orderDtoList = Collections.singletonList(new OrderDto(0L, "[username]", BigDecimal.valueOf(0.001), "0", "0", null));
-            return orderDtoList;
-        }
+    public Optional<OrderDto> getAllOrdersByCurrentUser(@RequestHeader(value = "username", required = false ) String username) {
         return ordersStatsService.getAllOrdersByCurrentUser(username);
     }
 
