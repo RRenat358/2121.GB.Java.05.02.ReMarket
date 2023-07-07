@@ -1,5 +1,6 @@
 angular.module('market-front').controller('ordersStatsController', function ($scope, $http, $location) {
     const ordersStatsPath = 'http://localhost:5555/stats/api/v1';
+    const contextPath = 'http://localhost:5555/core/api/v1';
 
 
 /*
@@ -19,8 +20,20 @@ angular.module('market-front').controller('ordersStatsController', function ($sc
     }
 
 
+    $scope.loadOrders = function () {
+        $http.get(contextPath + '/orders')
+            .then(function (response) {
+                $scope.MyOrders = response.data;
+            });
+    }
+
+
+
+
+
 
 
     $scope.loadOrdersStats();
+    $scope.loadOrders();
 
 });
