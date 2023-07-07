@@ -13,10 +13,11 @@ public class OrdersStatsService {
 
 
     public Integer getNumberOfOrdersByCurrentUser(String username) {
+        if (username == null || username.isBlank()) {
+            return 0;
+        }
         return coreServiceIntegration.getNumberOfOrdersByCurrentUser(username);
     }
-
-
 
 
 
