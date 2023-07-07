@@ -1,6 +1,5 @@
 package ru.rrenat358.stats.services;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.rrenat358.api.core.OrderDto;
@@ -25,17 +24,6 @@ public class OrdersStatsService {
         }
         return coreServiceIntegration.getNumberOfOrdersByCurrentUser(username);
     }
-
-/*
-    public List<OrderDto> getAllOrdersByCurrentUser(String username) {
-        if (username == null || username.isBlank()) {
-//            return null;
-            List<OrderDto> orderDtoList = Collections.singletonList(new OrderDto(0L, "[username]", BigDecimal.valueOf(0), "0", "0", null));
-            return orderDtoList;
-        }
-        return coreServiceIntegration.getAllOrdersByCurrentUser(username);
-    }
-*/
 
 
     public Optional<OrderDto> getAllOrdersByCurrentUser(String username) {

@@ -13,14 +13,6 @@ angular.module('market-front').controller('ordersController', function ($scope, 
         $location.path('/order_pay/' + orderId);
     }
 
-/*
-    $scope.loadOrdersStats = function () {
-        $http.get(contextPath + '/orders-stats')
-            .then(function (response) {
-                $scope.OrdersStats = response.data;
-            });
-    }
-*/
 
     $scope.loadOrdersStats = function () {
         $http.get(ordersStatsPath + '/orders-stats/number-of-orders-by-user')
@@ -33,6 +25,7 @@ angular.module('market-front').controller('ordersController', function ($scope, 
 
 /*
     //подгрузка скрипта в хейдр, но сама функция loadOrdersStats() не вызывается
+
     $scope.loadStats = function () {
         console.log('preparing to load...')
         console.log("loadStats");
