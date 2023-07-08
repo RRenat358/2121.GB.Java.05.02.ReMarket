@@ -47,11 +47,11 @@ public class CartService {
             c.add(productDto);
         });
         countProductIdAllUser.merge(productId, 1, (x, y) -> x + y);
-//        System.out.println("=================");
-//        System.out.println(countProductIdAllUser);
-//        System.out.println(topProductId(countProductIdAllUser, 3));
-//        System.out.println("-----------------");
-//        topProductsByAllUsers();
+        System.out.println("=================");
+        System.out.println(countProductIdAllUser);
+        topProductsByAllUsers(2);
+
+        System.out.println("-----------------");
     }
 
     public void clearCart(String cartKey) {
@@ -101,6 +101,8 @@ public class CartService {
 */
 
 
+/*
+    //корзина может отдать только 1 топПродукт корзин юзеров
     public ProductDto topProductsByAllUsers(Integer limit) {
         Set<ProductDto> topProduct = new HashSet<>();
         topProductId(countProductIdAllUser, limit)
@@ -113,6 +115,27 @@ public class CartService {
 //        System.out.println(topProduct);
         return  topProduct.stream().findFirst().get();
     }
+*/
+
+
+    public LinkedHashMap<ProductDto, Integer> topProductsByAllUsers(Integer limit) {
+        LinkedHashMap<ProductDto, Integer> topProduct = new LinkedHashMap<>();
+        topProductId(countProductIdAllUser, limit)
+                .forEach((productId, count) -> {
+                    ProductDto productDto = productsServiceIntegration.findById(productId)
+                            .orElseThrow(() -> new ResourceNotFoundException("Невозможно добавить продукт в корзину. Продукт не найдет, id: " + productId));
+
+                    System.out.println(productDto.toString());
+                    System.out.println("productDto: " + productDto + " == count:" + count);
+                    topProduct.put(productDto, count);
+                    System.out.println(String.valueOf(topProduct));
+                    Arrays.toString(topProduct.entrySet().toArray());
+
+                });
+//        System.out.println(topProduct);
+        return topProduct;
+    }
+
 
     private LinkedHashMap<Long, Integer> topProductId(HashMap<Long, Integer> countProduct, int limit) {
         LinkedHashMap<Long, Integer> topProductId = countProduct.entrySet()
