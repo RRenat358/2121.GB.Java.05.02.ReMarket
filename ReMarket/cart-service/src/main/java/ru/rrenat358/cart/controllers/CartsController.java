@@ -3,10 +3,12 @@ package ru.rrenat358.cart.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.rrenat358.api.carts.CartDto;
+import ru.rrenat358.api.core.ProductDto;
 import ru.rrenat358.api.dto.StringResponse;
 import ru.rrenat358.cart.converters.CartConverter;
 import ru.rrenat358.cart.services.CartService;
-import ru.rrenat358.cart.models.Cart;
+
+import java.util.LinkedHashMap;
 
 
 @RestController
@@ -53,6 +55,13 @@ public class CartsController {
                 getCurrentCartUuid(null, uuid)
         );
     }
+
+    @GetMapping("/top-products-by-all-users/{uuid}")
+    public LinkedHashMap<ProductDto, Integer> topProductsByAllUsers(@PathVariable Integer uuid) {
+        return cartService.topProductsByAllUsers(uuid);
+    }
+
+
 
     private String getCurrentCartUuid(String username, String uuid) {
         if (username != null) {
