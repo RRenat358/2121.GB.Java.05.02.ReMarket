@@ -12,7 +12,6 @@ import ru.rrenat358.cart.models.Cart;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +19,7 @@ public class CartService {
     private final ProductsServiceIntegration productsServiceIntegration;
     private final RedisTemplate<String, Object> redisTemplate;
 
-    private HashMap<Long, Integer> countProduct = new HashMap<>();
+    private HashMap<Long, Integer> countProductAllUser = new HashMap<>();
 
 
     @Value("${utils.cart.prefix}")
@@ -56,10 +55,10 @@ public class CartService {
 //
 //        countProduct.computeIfAbsent(productId, k -> 1).add(productId);
 
-        countProduct.merge(productId, 1, (x, y) -> x + y);
+        countProductAllUser.merge(productId, 1, (x, y) -> x + y);
         System.out.println("=================");
-        System.out.println(countProduct);
-        topProduct(countProduct);
+        System.out.println(countProductAllUser);
+        System.out.println(topProduct(countProductAllUser, 3));
     }
 
     public void clearCart(String cartKey) {
@@ -92,31 +91,17 @@ public class CartService {
         redisTemplate.opsForValue().set(cartKey, cart);
     }
 
-/*
-    private void topProduct(HashMap<Long, Integer> countProduct) {
+
+    private LinkedHashMap<Long, Integer> topProduct(HashMap<Long, Integer> countProduct, int limit) {
         LinkedHashMap<Long, Integer> topProduct = countProduct.entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .limit(limit)
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
                         Map.Entry::getValue,
                         (oldValue, newValue) -> oldValue, LinkedHashMap::new));
-
-        System.out.println(topProduct);
-    }
-*/
-
-    private void topProduct(HashMap<Long, Integer> countProduct) {
-        LinkedHashMap<Long, Integer> topProduct = countProduct.entrySet()
-                .stream()
-                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                .limit(3)
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        Map.Entry::getValue,
-                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
-
-        System.out.println(topProduct);
+        return topProduct;
     }
 
 
