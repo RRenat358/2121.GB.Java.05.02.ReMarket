@@ -5,9 +5,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.rrenat358.api.core.OrderDto;
 import ru.rrenat358.api.core.ProductDto;
+import ru.rrenat358.api.core.ProductDtoTopInCart;
 import ru.rrenat358.stats.services.OrdersStatsService;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -30,7 +32,7 @@ public class OrdersStatsController {
 
 
     @GetMapping("/top-products-by-all-users/{limit}")
-    public Optional<LinkedHashMap<ProductDto, Integer>> topProductsByAllUsers(@PathVariable Integer limit) {
+    public Optional<ProductDtoTopInCart> topProductsByAllUsers(@PathVariable Integer limit) {
         return ordersStatsService.topProductsByAllUsers(limit);
     }
 

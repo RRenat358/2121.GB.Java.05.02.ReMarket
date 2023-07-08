@@ -40,6 +40,7 @@ angular.module('market-front').controller('ordersStatsController', function ($sc
             .then(function (response) {
             console.log("$scope.topProductsByAllUsers========================");
                 $scope.topProductsByAllUsers = response.data;
+                console.log($scope.topProductsByAllUsers);
             });
     }
 

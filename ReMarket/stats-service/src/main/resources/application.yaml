@@ -3,6 +3,7 @@ server:
   servlet:
     context-path: /web-market-stats
 
+# если хранить в Redis
 utils:
   cart:
     prefix: REMARKET_STATS_
