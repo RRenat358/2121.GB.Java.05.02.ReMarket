@@ -35,6 +35,14 @@ angular.module('market-front').controller('ordersStatsController', function ($sc
     }
 
 
+    $scope.topProductsByAllUsers = function () {
+        $http.get(ordersStatsPath + '/orders-stats/top-products-by-all-users/3')
+            .then(function (response) {
+                $scope.topProductsByAllUsers = response.data;
+            });
+    }
+
+
 
 
 

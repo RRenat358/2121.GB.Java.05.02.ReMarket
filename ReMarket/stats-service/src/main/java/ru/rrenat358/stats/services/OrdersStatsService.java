@@ -3,19 +3,19 @@ package ru.rrenat358.stats.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.rrenat358.api.core.OrderDto;
+import ru.rrenat358.api.core.ProductDto;
+import ru.rrenat358.stats.integrations.CartServiceIntegration;
 import ru.rrenat358.stats.integrations.CoreServiceIntegration;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class OrdersStatsService {
 
     private final CoreServiceIntegration coreServiceIntegration;
+    private final CartServiceIntegration cartServiceIntegration;
 
 
     public Integer getNumberOfOrdersByCurrentUser(String username) {
@@ -36,4 +36,7 @@ public class OrdersStatsService {
     }
 
 
+    public Optional<LinkedHashMap<ProductDto, Integer>> topProductsByAllUsers(Integer limit) {
+        return cartServiceIntegration.topProductsByAllUsers(limit);
+    }
 }

@@ -2,13 +2,12 @@ package ru.rrenat358.stats.controllers;
 
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.rrenat358.api.core.OrderDto;
+import ru.rrenat358.api.core.ProductDto;
 import ru.rrenat358.stats.services.OrdersStatsService;
 
+import java.util.LinkedHashMap;
 import java.util.Optional;
 
 @RestController
@@ -30,6 +29,10 @@ public class OrdersStatsController {
     }
 
 
+    @GetMapping("/top-products-by-all-users/{limit}")
+    public Optional<LinkedHashMap<ProductDto, Integer>> topProductsByAllUsers(@PathVariable Integer limit) {
+        return ordersStatsService.topProductsByAllUsers(limit);
+    }
 
 
 }

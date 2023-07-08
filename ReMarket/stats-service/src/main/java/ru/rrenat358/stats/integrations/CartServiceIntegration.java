@@ -24,18 +24,20 @@ import java.util.Optional;
 public class CartServiceIntegration {
     private final WebClient cartServiceWebClient;
 
+/*
     public void clearUserCart(String username) {
-        cartServiceWebClient.get()
+        coreServiceWebClient.get()
                 .uri("/api/v1/cart/0/clear")
                 .header("username", username)
                 .retrieve()
                 .toBodilessEntity()
                 .block();
     }
+*/
 
 /*
     public CartDto getUserCart(String username) {
-        CartDto cart = cartServiceWebClient.get()
+        CartDto cart = coreServiceWebClient.get()
                 .uri("/api/v1/cart/0")
                 .header("username", username)
                 .retrieve()
@@ -69,4 +71,11 @@ public class CartServiceIntegration {
                 .block();
         return productDto;
     }
+
+
+
+
+
+
+
 }
