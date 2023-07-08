@@ -129,7 +129,7 @@ public class CartService {
                     System.out.println("productDto: " + productDto + " == count:" + count);
                     topProduct.put(productDto, count);
                     System.out.println(String.valueOf(topProduct));
-                    Arrays.toString(topProduct.entrySet().toArray());
+                    System.out.println(Arrays.toString(topProduct.entrySet().toArray()));
 
                 });
 //        System.out.println(topProduct);
