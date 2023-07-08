@@ -19,6 +19,7 @@
         </tbody>
     </table>
 
+    <!--============================================================-->
     <hr>
     <h3>Мои заказы</h3>
     <table class="table table-hover">
@@ -32,6 +33,27 @@
             <td>{{order.id}}</td>
             <td>{{order.address}}</td>
             <td>{{order.totalPrice}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!--============================================================-->
+    <hr>
+    <h3>Топ продуктов корзин всех пользователей</h3>
+    <table class="table table-hover">
+        <tr>
+            <td>Продукт</td>
+<!--            <td>Количество</td>-->
+        </tr>
+        <tbody>
+<!--        <tr>-->
+        <tr ng-repeat="top in topProductsByAllUsers">
+<!--            <td ng-repeat="itemProduct in top">{{itemProduct.id}}, {{itemProduct.title}}</td>-->
+<!--            <td>{{top.?}}</td>-->
+            <td>{{top}}</td>
+<!--            <td>{{top.address}}</td>-->
+
+
         </tr>
         </tbody>
     </table>
