@@ -1,9 +1,11 @@
 package ru.rrenat358.api.core;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
 import java.math.BigDecimal;
 
+//@Data
 @Schema(description = "Модель продукта")
 public class ProductDto {
     @Schema(description = "ID продукта", required = true, example = "1")
@@ -46,5 +48,14 @@ public class ProductDto {
         this.id = id;
         this.title = title;
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", price=" + price +
+                '}';
     }
 }

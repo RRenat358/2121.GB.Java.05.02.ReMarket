@@ -125,14 +125,14 @@ public class CartService {
                     ProductDto productDto = productsServiceIntegration.findById(productId)
                             .orElseThrow(() -> new ResourceNotFoundException("Невозможно добавить продукт в корзину. Продукт не найдет, id: " + productId));
 
-                    System.out.println(productDto.toString());
-                    System.out.println("productDto: " + productDto + " == count:" + count);
+//                    System.out.println(productDto.toString());
+//                    System.out.println("productDto: " + productDto + " == count:" + count);
                     topProduct.put(productDto, count);
-                    System.out.println(String.valueOf(topProduct));
-                    System.out.println(Arrays.toString(topProduct.entrySet().toArray()));
+//                    System.out.println(String.valueOf(topProduct));
+//                    System.out.println(Arrays.toString(topProduct.entrySet().toArray()));
 
                 });
-//        System.out.println(topProduct);
+        System.out.println(topProduct);
         return topProduct;
     }
 
