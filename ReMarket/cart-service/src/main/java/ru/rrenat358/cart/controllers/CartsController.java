@@ -56,8 +56,15 @@ public class CartsController {
         );
     }
 
+/*
     @GetMapping("/top-products-by-all-users/{uuid}")
     public LinkedHashMap<ProductDto, Integer> topProductsByAllUsers(@PathVariable Integer uuid) {
+        return cartService.topProductsByAllUsers(uuid);
+    }
+*/
+
+    @GetMapping("/top-products-by-all-users/{uuid}")
+    public ProductDto topProductsByAllUsers(@PathVariable Integer uuid) {
         return cartService.topProductsByAllUsers(uuid);
     }
 

@@ -85,6 +85,7 @@ public class CartService {
     }
 
 
+/*
     public LinkedHashMap<ProductDto, Integer> topProductsByAllUsers(Integer limit) {
         LinkedHashMap<ProductDto, Integer> topProduct = new LinkedHashMap<>();
         topProductId(countProductIdAllUser, limit)
@@ -96,6 +97,21 @@ public class CartService {
                 });
 //        System.out.println(topProduct);
         return topProduct;
+    }
+*/
+
+
+    public ProductDto topProductsByAllUsers(Integer limit) {
+        Set<ProductDto> topProduct = new HashSet<>();
+        topProductId(countProductIdAllUser, limit)
+                .forEach((productId, count) -> {
+                    ProductDto productDto = productsServiceIntegration.findById(productId)
+                            .orElseThrow(() -> new ResourceNotFoundException("Невозможно добавить продукт в корзину. Продукт не найдет, id: " + productId));
+                    topProduct.add(productDto);
+//                    System.out.println("productDto: " + productDto + " count:" + count);
+                });
+//        System.out.println(topProduct);
+        return  topProduct.stream().findFirst().get();
     }
 
     private LinkedHashMap<Long, Integer> topProductId(HashMap<Long, Integer> countProduct, int limit) {
