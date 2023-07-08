@@ -39,23 +39,16 @@
 
     <!--============================================================-->
     <hr>
-    <h3>Топ продуктов корзин всех пользователей</h3>
+    <h3>Топ продуктов из корзин всех пользователей</h3>
     <table class="table table-hover">
         <tr>
             <td>Продукт</td>
             <td>Количество</td>
         </tr>
         <tbody>
-<!--        <tr>-->
         <tr ng-repeat="top in topProductsByAllUsers">
-<!--            <td ng-repeat="itemProduct in top">{{itemProduct.id}}, {{itemProduct.title}}</td>-->
-<!--            <td>{{top.?}}</td>-->
-<!--            <td>{{top}}</td>-->
             <td>{{top.title}}</td>
             <td>{{top.countInCart}}</td>
-<!--            <td>{{top.address}}</td>-->
-
-
         </tr>
         </tbody>
     </table>

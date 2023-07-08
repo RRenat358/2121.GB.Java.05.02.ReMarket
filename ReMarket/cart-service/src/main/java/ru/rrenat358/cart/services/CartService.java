@@ -48,11 +48,6 @@ public class CartService {
             c.add(productDto);
         });
         countProductIdAllUser.merge(productId, 1, (x, y) -> x + y);
-        System.out.println("=================");
-        System.out.println(countProductIdAllUser);
-        topProductsByAllUsers(2);
-
-        System.out.println("-----------------");
     }
 
     public void clearCart(String cartKey) {
@@ -86,142 +81,18 @@ public class CartService {
     }
 
 
-/*
-    public LinkedHashMap<ProductDto, Integer> topProductsByAllUsers(Integer limit) {
-        LinkedHashMap<ProductDto, Integer> topProduct = new LinkedHashMap<>();
-        topProductId(countProductIdAllUser, limit)
-                .forEach((productId, count) -> {
-                    ProductDto productDto = productsServiceIntegration.findById(productId)
-                            .orElseThrow(() -> new ResourceNotFoundException("Невозможно добавить продукт в корзину. Продукт не найдет, id: " + productId));
-                    topProduct.put(productDto, count);
-//                    System.out.println("productDto: " + productDto + " count:" + count);
-                });
-//        System.out.println(topProduct);
-        return topProduct;
-    }
-*/
-
-
-/*
-    //корзина может отдать только 1 топПродукт корзин юзеров
-    public ProductDto topProductsByAllUsers(Integer limit) {
-        Set<ProductDto> topProduct = new HashSet<>();
-        topProductId(countProductIdAllUser, limit)
-                .forEach((productId, count) -> {
-                    ProductDto productDto = productsServiceIntegration.findById(productId)
-                            .orElseThrow(() -> new ResourceNotFoundException("Невозможно добавить продукт в корзину. Продукт не найдет, id: " + productId));
-                    topProduct.add(productDto);
-//                    System.out.println("productDto: " + productDto + " count:" + count);
-                });
-//        System.out.println(topProduct);
-        return  topProduct.stream().findFirst().get();
-    }
-*/
-
-
-/*
-    public LinkedHashMap<ProductDto, Integer> topProductsByAllUsers(Integer limit) {
-        LinkedHashMap<ProductDto, Integer> topProduct = new LinkedHashMap<>();
-        topProductId(countProductIdAllUser, limit)
-                .forEach((productId, count) -> {
-                    ProductDto productDto = productsServiceIntegration.findById(productId)
-                            .orElseThrow(() -> new ResourceNotFoundException("Невозможно добавить продукт в корзину. Продукт не найдет, id: " + productId));
-
-//                    System.out.println(productDto.toString());
-//                    System.out.println("productDto: " + productDto + " == count:" + count);
-
-
-                    topProduct.put(productDto, count);
-//                    topProduct.put("productDto=" + productDto, count);
-
-
-
-//                    System.out.println(String.valueOf(topProduct));
-//                    System.out.println(Arrays.toString(topProduct.entrySet().toArray()));
-
-                });
-        System.out.println(topProduct);
-        return topProduct;
-    }
-*/
-
-/*
-    public LinkedHashMap<String, String> topProductsByAllUsers(Integer limit) {
-        LinkedHashMap<String, String> topProduct = new LinkedHashMap<>();
-        topProductId(countProductIdAllUser, limit)
-                .forEach((productId, count) -> {
-                    String productDto = String.valueOf(productsServiceIntegration.findById(productId)
-                            .orElseThrow(() -> new ResourceNotFoundException("Невозможно добавить продукт в корзину. Продукт не найдет, id: " + productId)));
-
-//                    System.out.println(productDto.toString());
-//                    System.out.println("productDto: " + productDto + " == count:" + count);
-
-
-//                    topProduct.put(productDto, count);
-                    topProduct.put("productDto=" + productDto, "count=" + count);
-
-
-
-//                    System.out.println(String.valueOf(topProduct));
-//                    System.out.println(Arrays.toString(topProduct.entrySet().toArray()));
-
-                });
-        System.out.println(topProduct);
-        return topProduct;
-    }
-*/
-
-/*
-    public LinkedHashMap<Object, Object> topProductsByAllUsers(Integer limit) {
-        LinkedHashMap<String, ProductDto> productDtoMap = new LinkedHashMap<>();
-        LinkedHashMap<String, Integer> countMap = new LinkedHashMap<>();
-
-        LinkedHashMap<Object, Object> topProduct = new LinkedHashMap<>();
-        topProductId(countProductIdAllUser, limit)
-                .forEach((productId, count) -> {
-                    ProductDto productDto = productsServiceIntegration.findById(productId)
-                            .orElseThrow(() -> new ResourceNotFoundException("Невозможно добавить продукт в корзину. Продукт не найдет, id: " + productId));
-                    productDtoMap.put("productDto", productDto);
-                    countMap.put("count", count);
-
-//                    topProduct.put(productDto, count);
-                    topProduct.put(productDtoMap, countMap);
-
-                });
-        System.out.println(topProduct);
-        return topProduct;
-    }
-*/
-
     public Object topProductsByAllUsers(Integer limit) {
         List<ProductDtoTopInCart> productDtoTopInCarts = new ArrayList<>();
         topProductId(countProductIdAllUser, limit)
                 .forEach((productId, count) -> {
                     ProductDto productDto = productsServiceIntegration.findById(productId)
                             .orElseThrow(() -> new ResourceNotFoundException("Невозможно добавить продукт в корзину. Продукт не найдет, id: " + productId));
-
-//                    System.out.println(productDto.toString());
-//                    System.out.println("productDto: " + productDto + " == count:" + count);
-
-
-//                    topProduct.put(productDto, count);
                     productDtoTopInCarts.add(
                             new ProductDtoTopInCart(
                                     productDto.getId(), productDto.getTitle(), productDto.getPrice(), count));
-//                    topProduct.add()
-//                    topProduct.put("productDto=" + productDto, count);
-
-
-
-//                    System.out.println(String.valueOf(topProduct));
-//                    System.out.println(Arrays.toString(topProduct.entrySet().toArray()));
-
                 });
-        System.out.println(productDtoTopInCarts);
         return  productDtoTopInCarts;
     }
-
-
 
     private LinkedHashMap<Long, Integer> topProductId(HashMap<Long, Integer> countProduct, int limit) {
         LinkedHashMap<Long, Integer> topProductId = countProduct.entrySet()

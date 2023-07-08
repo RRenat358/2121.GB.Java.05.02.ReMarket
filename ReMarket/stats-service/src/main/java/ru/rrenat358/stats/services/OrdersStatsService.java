@@ -36,19 +36,6 @@ public class OrdersStatsService {
         return coreServiceIntegration.getAllOrdersByCurrentUser(username);
     }
 
-
-/*
-    public Optional<LinkedHashMap<ProductDto, Integer>> topProductsByAllUsers(Integer limit) {
-        return cartServiceIntegration.topProductsByAllUsers(limit);
-    }
-*/
-
-/*
-    public Map<Object, Object> topProductsByAllUsers(Integer limit) {
-        return cartServiceIntegration.topProductsByAllUsers(limit);
-    }
-*/
-
     public Optional<ProductDtoTopInCart> topProductsByAllUsers(Integer limit) {
         return cartServiceIntegration.topProductsByAllUsers(limit);
     }

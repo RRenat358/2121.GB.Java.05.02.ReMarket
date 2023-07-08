@@ -30,7 +30,6 @@ public class OrdersStatsController {
         return ordersStatsService.getAllOrdersByCurrentUser(username);
     }
 
-
     @GetMapping("/top-products-by-all-users/{limit}")
     public Optional<ProductDtoTopInCart> topProductsByAllUsers(@PathVariable Integer limit) {
         return ordersStatsService.topProductsByAllUsers(limit);
