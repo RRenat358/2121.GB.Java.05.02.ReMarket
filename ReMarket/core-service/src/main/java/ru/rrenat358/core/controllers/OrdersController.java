@@ -50,4 +50,11 @@ public class OrdersController {
         return orderService.getNumberOfOrdersByCurrentUser(username);
     }
 
+
+    @GetMapping("/all-orders5")
+    public List<String> getAllOrders5() {
+        return orderService.getAllOrders5();
+    }
+
+
 }

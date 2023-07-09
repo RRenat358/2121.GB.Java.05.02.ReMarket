@@ -63,9 +63,22 @@ public class OrderService {
         return ordersRepository.findById(id);
     }
 
+
+
     public Integer getNumberOfOrdersByCurrentUser(String username) {
         return ordersRepository.getNumberOfOrdersByCurrentUser(username);
     }
+
+
+//    public List<Order> topProductByAllOrders(String username) {
+//        return ordersRepository.topItemsByAllOrders(username);
+//    }
+
+
+    public List<String> getAllOrders5() {
+        return ordersRepository.getAllOrders5();
+    }
+
 
 
 }
