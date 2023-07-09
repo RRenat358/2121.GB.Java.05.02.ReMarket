@@ -16,9 +16,7 @@ import ru.rrenat358.core.entities.Product;
 import ru.rrenat358.core.integrations.CartServiceIntegration;
 import ru.rrenat358.core.repositories.OrdersRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -74,13 +72,12 @@ public class OrderService {
     }
 
 
+    //============================================================
     public List<ProductTopInOrdersDto> topProductsByAllOrders(Integer topLimit) {
         List<Product> productList = ordersRepository.topProductsByAllOrders(Pageable.ofSize(topLimit));
-        System.out.println(productList);
         List<ProductTopInOrdersDto> productDtoList = entityToDtoList(productList);
         return productDtoList;
     }
-
 
     public List<ProductTopInOrdersDto> entityToDtoList(List<Product> productList) {
         List<ProductTopInOrdersDto> productDtoList = productList
@@ -95,6 +92,20 @@ public class OrderService {
                 })
                 .collect(Collectors.toList());
         return productDtoList;
+    }
+
+    //============================================================
+    public List<Integer> topProductsCountByAllOrders(Integer topLimit) {
+        return ordersRepository.topProductsByAllOrdersCount(Pageable.ofSize(topLimit));
+    }
+
+    //============================================================
+    public LinkedHashMap<List<Integer>, List<ProductTopInOrdersDto>> topProductsWithCountByAllOrders(Integer topLimit) {
+        List<ProductTopInOrdersDto> productTopInOrdersDtos = topProductsByAllOrders(topLimit);
+        List<Integer> countList = topProductsCountByAllOrders(topLimit);
+        LinkedHashMap<List<Integer>, List<ProductTopInOrdersDto>> map = new LinkedHashMap<>();
+        map.put(countList, productTopInOrdersDtos);
+        return map;
     }
 
 

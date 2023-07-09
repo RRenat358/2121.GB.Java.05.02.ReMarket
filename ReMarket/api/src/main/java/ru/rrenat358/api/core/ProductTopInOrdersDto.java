@@ -19,8 +19,8 @@ public class ProductTopInOrdersDto {
     @Schema(description = "Группа продуктов", required = true, maxLength = 255, minLength = 3, example = "Фрукты")
     private String groupProduct;
 
-//    @Schema(description = "Количество по заказам всех юзеров", required = true, example = "5")
-//    private Integer countInOrders;
+    @Schema(description = "Количество по заказам всех юзеров", required = true, example = "5")
+    private Integer countInOrders;
 
 
 
@@ -56,7 +56,6 @@ public class ProductTopInOrdersDto {
         this.groupProduct = groupProduct;
     }
 
-/*
     public Integer getCountInOrders() {
         return countInOrders;
     }
@@ -64,9 +63,7 @@ public class ProductTopInOrdersDto {
     public void setCountInOrders(Integer countInOrders) {
         this.countInOrders = countInOrders;
     }
-*/
 
-/*
     public ProductTopInOrdersDto(Long id, String title, BigDecimal price, String groupProduct, Integer countInOrders) {
         this.id = id;
         this.title = title;
@@ -74,14 +71,15 @@ public class ProductTopInOrdersDto {
         this.groupProduct = groupProduct;
         this.countInOrders = countInOrders;
     }
-*/
 
+/*
 public ProductTopInOrdersDto(Long id, String title, BigDecimal price, String groupProduct) {
     this.id = id;
     this.title = title;
     this.price = price;
     this.groupProduct = groupProduct;
 }
+*/
 
     public ProductTopInOrdersDto() {
     }

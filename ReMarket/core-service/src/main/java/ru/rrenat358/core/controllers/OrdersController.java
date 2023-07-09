@@ -12,6 +12,7 @@ import ru.rrenat358.core.entities.Order;
 import ru.rrenat358.core.entities.Product;
 import ru.rrenat358.core.services.OrderService;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -54,10 +55,22 @@ public class OrdersController {
     }
 
 
+    //============================================================
     @GetMapping("/top-products-by-all-orders/{topLimit}")
     public List<ProductTopInOrdersDto> topProductsByAllOrders(@PathVariable Integer topLimit) {
         return orderService.topProductsByAllOrders(topLimit);
     }
 
+    @GetMapping("/top-products-count-by-all-orders/{topLimit}")
+    public List<Integer> topProductsByAllOrdersCount(@PathVariable Integer topLimit) {
+        return orderService.topProductsCountByAllOrders(topLimit);
+    }
+
+    @GetMapping("/top-products-with-count-by-all-orders/{topLimit}")
+    public LinkedHashMap<List<Integer>, List<ProductTopInOrdersDto>> topProductsByAllOrdersPC(@PathVariable Integer topLimit) {
+        return orderService.topProductsWithCountByAllOrders(topLimit);
+    }
+
+    //============================================================
 
 }

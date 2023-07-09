@@ -9,8 +9,7 @@ import ru.rrenat358.api.core.ProductTopInOrdersDto;
 import ru.rrenat358.core.entities.Order;
 import ru.rrenat358.core.entities.Product;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Repository
 public interface OrdersRepository extends JpaRepository<Order, Long> {
@@ -22,45 +21,9 @@ public interface OrdersRepository extends JpaRepository<Order, Long> {
     @Query("SELECT count(*) FROM Order o WHERE o.username = ?1")
     Integer getNumberOfOrdersByCurrentUser(String username);
 
-/*
-    @Query("""
-            SELECT  p.title, COUNT(*) AS count
-            FROM Product p
-            INNER JOIN OrderItem oi
-            ON p.id = oi.product.id
-            GROUP BY p.title
-            ORDER BY COUNT(*) DESC
-            """)
-    List<Product> topProductsByAllOrders(Pageable pageable);
 
-*/
-
-/*
     @Query("""
-            SELECT  p.id, p.title, p.groupProduct, p.price, COUNT(*) AS count
-            FROM Product p
-            INNER JOIN OrderItem oi
-            ON p.id = oi.product.id
-            GROUP BY p.id
-            ORDER BY COUNT(*) DESC
-            """)
-    List<Product> topProductsByAllOrders(Pageable pageable);
-*/
-
-/*
-    @Query("""
-            SELECT  p.id, p.title, p.price, p.groupProduct, COUNT(*) AS count
-            FROM Product p
-            INNER JOIN OrderItem oi
-            ON p.id = oi.product.id
-            GROUP BY p
-            ORDER BY COUNT(*) DESC
-            """)
-    List<Object> topProductsByAllOrders(Pageable pageable);
-
-*/
-    @Query("""
-            SELECT  p, COUNT(*) AS count
+            SELECT  p, COUNT(*)
             FROM Product p
             INNER JOIN OrderItem oi
             ON p.id = oi.product.id
@@ -68,6 +31,17 @@ public interface OrdersRepository extends JpaRepository<Order, Long> {
             ORDER BY COUNT(*) DESC
             """)
     List<Product> topProductsByAllOrders(Pageable pageable);
+
+    @Query("""
+            SELECT COUNT(*)
+            FROM Product p
+            INNER JOIN OrderItem oi
+            ON p.id = oi.product.id
+            GROUP BY p
+            ORDER BY COUNT(*) DESC
+            """)
+    List<Integer> topProductsByAllOrdersCount(Pageable pageable);
+
 
 
 
