@@ -1,15 +1,22 @@
 package ru.rrenat358.core.services;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.rrenat358.api.carts.CartDto;
 import ru.rrenat358.api.core.OrderDetailsDto;
+import ru.rrenat358.api.core.ProductDto;
+import ru.rrenat358.api.core.ProductDtoTopInCart;
+import ru.rrenat358.api.core.ProductTopInOrdersDto;
 import ru.rrenat358.core.entities.Order;
 import ru.rrenat358.core.entities.OrderItem;
+import ru.rrenat358.core.entities.Product;
 import ru.rrenat358.core.integrations.CartServiceIntegration;
 import ru.rrenat358.core.repositories.OrdersRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,7 +28,6 @@ public class OrderService {
     private final ProductsService productsService;
     private final OrdersRepository ordersRepository;
     private final CartServiceIntegration cartServiceIntegration;
-
 
 
     @Transactional
@@ -63,22 +69,33 @@ public class OrderService {
         return ordersRepository.findById(id);
     }
 
-
-
     public Integer getNumberOfOrdersByCurrentUser(String username) {
         return ordersRepository.getNumberOfOrdersByCurrentUser(username);
     }
 
 
-//    public List<Order> topProductByAllOrders(String username) {
-//        return ordersRepository.topItemsByAllOrders(username);
-//    }
-
-
-    public List<String> getAllOrders5() {
-        return ordersRepository.getAllOrders5();
+    public List<ProductTopInOrdersDto> topProductsByAllOrders(Integer topLimit) {
+        List<Product> productList = ordersRepository.topProductsByAllOrders(Pageable.ofSize(topLimit));
+        System.out.println(productList);
+        List<ProductTopInOrdersDto> productDtoList = entityToDtoList(productList);
+        return productDtoList;
     }
 
+
+    public List<ProductTopInOrdersDto> entityToDtoList(List<Product> productList) {
+        List<ProductTopInOrdersDto> productDtoList = productList
+                .stream()
+                .map(product -> {
+                    ProductTopInOrdersDto productDto = new ProductTopInOrdersDto();
+                    productDto.setId(product.getId());
+                    productDto.setTitle(product.getTitle());
+                    productDto.setPrice(product.getPrice());
+                    productDto.setGroupProduct(product.getGroupProduct());
+                    return productDto;
+                })
+                .collect(Collectors.toList());
+        return productDtoList;
+    }
 
 
 }

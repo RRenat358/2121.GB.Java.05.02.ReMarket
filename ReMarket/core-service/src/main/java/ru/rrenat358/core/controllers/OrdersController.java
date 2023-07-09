@@ -5,12 +5,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.rrenat358.api.core.OrderDetailsDto;
 import ru.rrenat358.api.core.OrderDto;
+import ru.rrenat358.api.core.ProductTopInOrdersDto;
 import ru.rrenat358.api.exceptions.ResourceNotFoundException;
 import ru.rrenat358.core.converters.OrderConverter;
 import ru.rrenat358.core.entities.Order;
+import ru.rrenat358.core.entities.Product;
 import ru.rrenat358.core.services.OrderService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -51,9 +54,9 @@ public class OrdersController {
     }
 
 
-    @GetMapping("/all-orders5")
-    public List<String> getAllOrders5() {
-        return orderService.getAllOrders5();
+    @GetMapping("/top-products-by-all-orders/{topLimit}")
+    public List<ProductTopInOrdersDto> topProductsByAllOrders(@PathVariable Integer topLimit) {
+        return orderService.topProductsByAllOrders(topLimit);
     }
 
 
