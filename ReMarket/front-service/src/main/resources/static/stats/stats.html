@@ -40,6 +40,13 @@
     <!--============================================================-->
     <hr>
     <h3>Топ продуктов из корзин всех пользователей</h3>
+    <form novalidate ng-submit="loadTopProductsByAllUsers()">
+        <input class="form-control" type="number" id="topLimit" placeholder="topLimit" ng-model="topLimit">
+        <br>
+        <button type="submit" class="btn btn-outline-success">ОК</button>
+    </form>
+    <br>
+
     <table class="table table-hover">
         <tr>
             <td>Продукт</td>
