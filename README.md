@@ -25,13 +25,12 @@ http://localhost:8189/web-market-core/swagger-ui/index.html
 \
 ============================================================   
 ### PayPal  
-
+Без данных в файле secret.properties - проект не запускается  
 
 Для работы подставить свои данные в файлы:   
 
 1--  
 ReMarket/core-service/src/main/resources/secret.properties  
-
 `paypal.client-id=  `  
 `paypal.client-secret=  `  
 

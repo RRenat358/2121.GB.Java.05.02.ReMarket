@@ -26,20 +26,11 @@ angular.module('market-front').controller('ordersStatsController', function ($sc
     }
 
     //============================================================
-    // $scope.loadTopProductsByAllUsers = function () {
-    //     $http.get(ordersStatsPath + '/orders-stats/top-products-by-all-users/3')
-    //         .then(function (response) {
-    //             $scope.topProductsByAllUsers = response.data;
-    //         });
-    // }
-
-
+    $scope.topLimit=3;
     $scope.loadTopProductsByAllUsers = function () {
-        console.log($scope.topLimit + " ===========================");
         $http.get(ordersStatsPath + '/orders-stats/top-products-by-all-users/' + $scope.topLimit)
             .then(function (response) {
                 $scope.topProductsByAllUsers = response.data;
-                // $scope.loadProducts();
             });
     }
 
@@ -49,6 +40,6 @@ angular.module('market-front').controller('ordersStatsController', function ($sc
 
     $scope.loadOrdersStats();
     $scope.loadAllOrders();
-    // $scope.loadTopProductsByAllUsers();
+    $scope.loadTopProductsByAllUsers();
 
 });
