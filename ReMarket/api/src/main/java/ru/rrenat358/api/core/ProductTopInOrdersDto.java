@@ -72,14 +72,12 @@ public class ProductTopInOrdersDto {
         this.countInOrders = countInOrders;
     }
 
-/*
 public ProductTopInOrdersDto(Long id, String title, BigDecimal price, String groupProduct) {
     this.id = id;
     this.title = title;
     this.price = price;
     this.groupProduct = groupProduct;
 }
-*/
 
     public ProductTopInOrdersDto() {
     }

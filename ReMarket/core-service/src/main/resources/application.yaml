@@ -18,6 +18,11 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
+#        cache:
+#          use_second_level_cache: false
+#          provider_class: org.hibernate.cache.NoCacheProvider
+#        <property name="hibernate.cache.use_second_level_cache" value="false" />
+#        <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider" />
   h2:
     console:
       enabled: true

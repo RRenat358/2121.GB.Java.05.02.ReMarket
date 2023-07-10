@@ -1,14 +1,11 @@
 package ru.rrenat358.core.repositories;
 
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import ru.rrenat358.api.core.ProductTopInOrdersDto;
 import ru.rrenat358.core.entities.Order;
 import ru.rrenat358.core.entities.Product;
-
 import java.util.*;
 
 @Repository
@@ -22,22 +19,27 @@ public interface OrdersRepository extends JpaRepository<Order, Long> {
     Integer getNumberOfOrdersByCurrentUser(String username);
 
 
+//    @QueryHints(
+//            @QueryHint(name = "org.hibernate.cacheable", value = "false")
+//    )
     @Query("""
-            SELECT  p, COUNT(*)
+            SELECT p, COUNT(*) AS count
             FROM Product p
             INNER JOIN OrderItem oi
             ON p.id = oi.product.id
-            GROUP BY p
+            GROUP BY oi.product.id
             ORDER BY COUNT(*) DESC
             """)
     List<Product> topProductsByAllOrders(Pageable pageable);
+
+
 
     @Query("""
             SELECT COUNT(*)
             FROM Product p
             INNER JOIN OrderItem oi
             ON p.id = oi.product.id
-            GROUP BY p
+            GROUP BY p.id
             ORDER BY COUNT(*) DESC
             """)
     List<Integer> topProductsByAllOrdersCount(Pageable pageable);

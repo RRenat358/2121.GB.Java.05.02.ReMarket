@@ -10,6 +10,7 @@ import ru.rrenat358.api.core.OrderDetailsDto;
 import ru.rrenat358.api.core.ProductDto;
 import ru.rrenat358.api.core.ProductDtoTopInCart;
 import ru.rrenat358.api.core.ProductTopInOrdersDto;
+import ru.rrenat358.core.converters.ProductTopInOrdersConverter;
 import ru.rrenat358.core.entities.Order;
 import ru.rrenat358.core.entities.OrderItem;
 import ru.rrenat358.core.entities.Product;
@@ -26,6 +27,7 @@ public class OrderService {
     private final ProductsService productsService;
     private final OrdersRepository ordersRepository;
     private final CartServiceIntegration cartServiceIntegration;
+    private final ProductTopInOrdersConverter productTopInOrdersConverter;
 
 
     @Transactional
@@ -74,10 +76,32 @@ public class OrderService {
 
     //============================================================
     public List<ProductTopInOrdersDto> topProductsByAllOrders(Integer topLimit) {
+//        List<Product> productList = new ArrayList<>();
+//        List<ProductTopInOrdersDto> productDtoList = new ArrayList<>();
+//        List<Integer> countList = new ArrayList<>();
+//
+//        productList.clear();
+//        productDtoList.clear();
+//        countList.clear();
+
+
         List<Product> productList = ordersRepository.topProductsByAllOrders(Pageable.ofSize(topLimit));
         List<ProductTopInOrdersDto> productDtoList = entityToDtoList(productList);
+//        List<ProductTopInOrdersDto> productDtoList = productTopInOrdersConverter.entityToDtoList(productList);
+
+//        countList = topProductsCountByAllOrders(topLimit);
+//        for (int i = 0; i < topLimit; i++) {
+//            productDtoList.get(i).setCountInOrders(countList.get(i));
+//        }
+
+//        topLimit = 555;
         return productDtoList;
     }
+
+    public List<Integer> topProductsCountByAllOrders(Integer topLimit) {
+        return ordersRepository.topProductsByAllOrdersCount(Pageable.ofSize(topLimit));
+    }
+
 
     public List<ProductTopInOrdersDto> entityToDtoList(List<Product> productList) {
         List<ProductTopInOrdersDto> productDtoList = productList
@@ -94,10 +118,6 @@ public class OrderService {
         return productDtoList;
     }
 
-    //============================================================
-    public List<Integer> topProductsCountByAllOrders(Integer topLimit) {
-        return ordersRepository.topProductsByAllOrdersCount(Pageable.ofSize(topLimit));
-    }
 
     //============================================================
     public LinkedHashMap<List<Integer>, List<ProductTopInOrdersDto>> topProductsWithCountByAllOrders(Integer topLimit) {

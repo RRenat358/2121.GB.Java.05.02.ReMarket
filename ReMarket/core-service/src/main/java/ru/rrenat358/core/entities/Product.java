@@ -1,10 +1,13 @@
 package ru.rrenat358.core.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -13,6 +16,7 @@ import java.time.LocalDateTime;
 @Table(name = "products")
 @Data
 @NoArgsConstructor
+//@AllArgsConstructor
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,4 +59,26 @@ public class Product {
         this.title = title;
         this.price = price;
     }
+
+    public Product(Long id, String title, BigDecimal price, String groupProduct) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+        this.groupProduct = groupProduct;
+    }
+
+    public Product(Long id, String title, BigDecimal price, String proteins, String fats, String carbohydrates, String calories, String groupProduct, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+        this.proteins = proteins;
+        this.fats = fats;
+        this.carbohydrates = carbohydrates;
+        this.calories = calories;
+        this.groupProduct = groupProduct;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+
 }
