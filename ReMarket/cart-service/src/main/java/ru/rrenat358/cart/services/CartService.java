@@ -81,7 +81,7 @@ public class CartService {
     }
 
 
-    public Object topProductsByAllUsers(Integer limit) {
+    public Object topProductsByAllCarts(Integer limit) {
         List<ProductTopInCartDto> productTopInCartDtos = new ArrayList<>();
         topProductId(countProductIdAllUser, limit)
                 .forEach((productId, count) -> {

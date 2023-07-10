@@ -15,7 +15,7 @@ import java.util.Optional;
 public class CartServiceIntegration {
     private final WebClient cartServiceWebClient;
 
-    public Optional<ProductTopInCartDto> topProductsByAllUsers(Integer topLimit) {
+    public Optional<ProductTopInCartDto> topProductsByAllCarts(Integer topLimit) {
         Optional productDto = cartServiceWebClient.get()
 //                .uri("/api/v1/cart/top-products-by-all-users/" + topLimit)
                 .uri("/api/v1/cart/top-products-in-all-carts/" + topLimit)

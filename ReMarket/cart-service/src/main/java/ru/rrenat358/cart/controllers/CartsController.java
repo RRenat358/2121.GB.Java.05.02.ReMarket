@@ -3,12 +3,9 @@ package ru.rrenat358.cart.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.rrenat358.api.carts.CartDto;
-import ru.rrenat358.api.core.ProductDto;
 import ru.rrenat358.api.dto.StringResponse;
 import ru.rrenat358.cart.converters.CartConverter;
 import ru.rrenat358.cart.services.CartService;
-
-import java.util.LinkedHashMap;
 
 
 @RestController
@@ -57,8 +54,8 @@ public class CartsController {
     }
 
     @GetMapping("/top-products-in-all-carts/{topLimit}")
-    public Object topProductsByAllUsers(@PathVariable Integer topLimit) {
-        return cartService.topProductsByAllUsers(topLimit);
+    public Object topProductsByAllCarts(@PathVariable Integer topLimit) {
+        return cartService.topProductsByAllCarts(topLimit);
     }
 
 

@@ -35,8 +35,8 @@ public class OrdersStatsService {
         return coreServiceIntegration.getAllOrdersByCurrentUser(username);
     }
 
-    public Optional<ProductTopInCartDto> topProductsByAllUsers(Integer limit) {
-        return cartServiceIntegration.topProductsByAllUsers(limit);
+    public Optional<ProductTopInCartDto> topProductsByAllCarts(Integer limit) {
+        return cartServiceIntegration.topProductsByAllCarts(limit);
     }
 
 

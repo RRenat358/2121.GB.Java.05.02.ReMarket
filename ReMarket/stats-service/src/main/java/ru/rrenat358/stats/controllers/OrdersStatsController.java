@@ -28,8 +28,8 @@ public class OrdersStatsController {
     }
 
     @GetMapping("/top-products-in-all-carts/{limit}")
-    public Optional<ProductTopInCartDto> topProductsByAllUsers(@PathVariable Integer limit) {
-        return ordersStatsService.topProductsByAllUsers(limit);
+    public Optional<ProductTopInCartDto> topProductsByAllCarts(@PathVariable Integer limit) {
+        return ordersStatsService.topProductsByAllCarts(limit);
     }
 
 
