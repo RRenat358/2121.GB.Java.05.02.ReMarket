@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Table(name = "products")
 @Data
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,18 +67,6 @@ public class Product {
         this.groupProduct = groupProduct;
     }
 
-    public Product(Long id, String title, BigDecimal price, String proteins, String fats, String carbohydrates, String calories, String groupProduct, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.id = id;
-        this.title = title;
-        this.price = price;
-        this.proteins = proteins;
-        this.fats = fats;
-        this.carbohydrates = carbohydrates;
-        this.calories = calories;
-        this.groupProduct = groupProduct;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
 
 
 }

@@ -28,7 +28,7 @@ angular.module('market-front').controller('ordersStatsController', function ($sc
     //============================================================
     $scope.topLimit=3;
     $scope.loadTopProductsByAllUsers = function () {
-        $http.get(ordersStatsPath + '/orders-stats/top-products-by-all-users/' + $scope.topLimit)
+        $http.get(ordersStatsPath + '/orders-stats/top-products-in-all-carts/' + $scope.topLimit)
             .then(function (response) {
                 $scope.topProductsByAllUsers = response.data;
             });

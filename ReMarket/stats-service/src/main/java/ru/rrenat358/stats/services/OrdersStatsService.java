@@ -3,8 +3,7 @@ package ru.rrenat358.stats.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.rrenat358.api.core.OrderDto;
-import ru.rrenat358.api.core.ProductDto;
-import ru.rrenat358.api.core.ProductDtoTopInCart;
+import ru.rrenat358.api.core.ProductTopInCartDto;
 import ru.rrenat358.stats.integrations.CartServiceIntegration;
 import ru.rrenat358.stats.integrations.CoreServiceIntegration;
 
@@ -36,7 +35,7 @@ public class OrdersStatsService {
         return coreServiceIntegration.getAllOrdersByCurrentUser(username);
     }
 
-    public Optional<ProductDtoTopInCart> topProductsByAllUsers(Integer limit) {
+    public Optional<ProductTopInCartDto> topProductsByAllUsers(Integer limit) {
         return cartServiceIntegration.topProductsByAllUsers(limit);
     }
 

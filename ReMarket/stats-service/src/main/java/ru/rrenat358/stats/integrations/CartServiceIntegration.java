@@ -3,17 +3,11 @@ package ru.rrenat358.stats.integrations;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.reactive.function.client.WebClient;
-import ru.rrenat358.api.carts.CartDto;
-import ru.rrenat358.api.core.ProductDto;
-import ru.rrenat358.api.core.ProductDtoTopInCart;
+import ru.rrenat358.api.core.ProductTopInCartDto;
 import ru.rrenat358.api.exceptions.CartServiceAppError;
 import ru.rrenat358.stats.exceptions.CartServiceIntegrationException;
 
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
 import java.util.Optional;
 
 @Component
@@ -21,9 +15,10 @@ import java.util.Optional;
 public class CartServiceIntegration {
     private final WebClient cartServiceWebClient;
 
-    public Optional<ProductDtoTopInCart> topProductsByAllUsers(Integer topLimit) {
+    public Optional<ProductTopInCartDto> topProductsByAllUsers(Integer topLimit) {
         Optional productDto = cartServiceWebClient.get()
-                .uri("/api/v1/cart/top-products-by-all-users/" + topLimit)
+//                .uri("/api/v1/cart/top-products-by-all-users/" + topLimit)
+                .uri("/api/v1/cart/top-products-in-all-carts/" + topLimit)
                 .retrieve()
                 .onStatus(
                         httpStatus -> httpStatus.is4xxClientError(), // HttpStatus::is4xxClientError

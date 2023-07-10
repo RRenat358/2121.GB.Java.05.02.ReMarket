@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.math.BigDecimal;
 
-//@Data
 @Schema(description = "Модель топ продуктов по всем заказам всех юзеров")
 public class ProductTopInOrdersDto {
     @Schema(description = "ID продукта", required = true, example = "1")
@@ -21,7 +20,6 @@ public class ProductTopInOrdersDto {
 
     @Schema(description = "Количество по заказам всех юзеров", required = true, example = "5")
     private Integer countInOrders;
-
 
 
     public Long getId() {
@@ -72,16 +70,15 @@ public class ProductTopInOrdersDto {
         this.countInOrders = countInOrders;
     }
 
-public ProductTopInOrdersDto(Long id, String title, BigDecimal price, String groupProduct) {
-    this.id = id;
-    this.title = title;
-    this.price = price;
-    this.groupProduct = groupProduct;
-}
+    public ProductTopInOrdersDto(Long id, String title, BigDecimal price, String groupProduct) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+        this.groupProduct = groupProduct;
+    }
 
     public ProductTopInOrdersDto() {
     }
-
 
 
 }

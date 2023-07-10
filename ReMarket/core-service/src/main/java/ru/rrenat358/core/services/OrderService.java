@@ -2,13 +2,10 @@ package ru.rrenat358.core.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.rrenat358.api.carts.CartDto;
 import ru.rrenat358.api.core.OrderDetailsDto;
-import ru.rrenat358.api.core.ProductDto;
-import ru.rrenat358.api.core.ProductDtoTopInCart;
 import ru.rrenat358.api.core.ProductTopInOrdersDto;
 import ru.rrenat358.core.converters.ProductTopInOrdersConverter;
 import ru.rrenat358.core.entities.Order;

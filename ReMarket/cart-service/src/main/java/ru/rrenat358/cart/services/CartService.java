@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import ru.rrenat358.api.core.ProductDto;
-import ru.rrenat358.api.core.ProductDtoTopInCart;
+import ru.rrenat358.api.core.ProductTopInCartDto;
 import ru.rrenat358.api.exceptions.ResourceNotFoundException;
 import ru.rrenat358.cart.integrations.ProductsServiceIntegration;
 import ru.rrenat358.cart.models.Cart;
@@ -82,16 +82,16 @@ public class CartService {
 
 
     public Object topProductsByAllUsers(Integer limit) {
-        List<ProductDtoTopInCart> productDtoTopInCarts = new ArrayList<>();
+        List<ProductTopInCartDto> productTopInCartDtos = new ArrayList<>();
         topProductId(countProductIdAllUser, limit)
                 .forEach((productId, count) -> {
                     ProductDto productDto = productsServiceIntegration.findById(productId)
                             .orElseThrow(() -> new ResourceNotFoundException("Невозможно добавить продукт в корзину. Продукт не найдет, id: " + productId));
-                    productDtoTopInCarts.add(
-                            new ProductDtoTopInCart(
+                    productTopInCartDtos.add(
+                            new ProductTopInCartDto(
                                     productDto.getId(), productDto.getTitle(), productDto.getPrice(), count));
                 });
-        return  productDtoTopInCarts;
+        return productTopInCartDtos;
     }
 
     private LinkedHashMap<Long, Integer> topProductId(HashMap<Long, Integer> countProduct, int limit) {

@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 //@Data
 @Schema(description = "Модель продукта")
-public class ProductDtoTopInCart {
+public class ProductTopInCartDto {
     @Schema(description = "ID продукта", required = true, example = "1")
     private Long id;
 
@@ -53,10 +53,10 @@ public class ProductDtoTopInCart {
     }
 
 
-    public ProductDtoTopInCart() {
+    public ProductTopInCartDto() {
     }
 
-    public ProductDtoTopInCart(Long id, String title, BigDecimal price, Integer countInCart) {
+    public ProductTopInCartDto(Long id, String title, BigDecimal price, Integer countInCart) {
         this.id = id;
         this.title = title;
         this.price = price;

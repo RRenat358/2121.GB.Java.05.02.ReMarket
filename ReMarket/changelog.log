@@ -19,12 +19,12 @@
 20230629 = w = V1__init.sql → price == numeric(8,2)
 20230629 = w = change price from int to BigDecimal
 20230630 = o = add swagger in ProductsController
-20230701 = o = эксепшены между MS - прокидываем через коды
+20230701 = w = эксепшены между MS - прокидываем через коды
 20230701 = o = включение конфигурации таймаутов через отдельный файл
 20230701 = i = release-0.0.4
 ==============================
 20230703 = o = paypal
-20230703 = e = ошибка при отправке запроса на оплату = https://developer.paypal.com/docs/api/orders/v2/#error-ITEM_TOTAL_MISMATCH
+20230703 = e = paypal - ошибка при отправке запроса на оплату = ....#error-ITEM_TOTAL_MISMATCH...
 20230703 = o = add @SpringBootTest == CartServiceTest
 20230703 = o = refactoring, приведение к L12
 20230703 = o = paypal == в целом работает, проверено до момента ввода платёжных данных
@@ -32,14 +32,15 @@
 ==============================
 20230704 = o = paypal - change client-id
 20230704 = o = paypal - успешная оплата заказа
-20230705 = o = rename general module = ReMarket-02-08 -to- ReMarket
-20230706 = o = add stats-service
+20230705 = w = rename general module = ReMarket-02-08 -to- ReMarket
+20230706 = w = add stats-service
 20230706 = o = stats - количество заказов пользователя на странице Заказы
 20230706 = o = stats - количество заказов пользователя на странице Статистика
 20230707 = o = stats - все заказы пользователя на странице Статистика
 20230708 = o = stats - top 3 продукта
 20230708 = o = stats - top N продуктов по вводу и нажатии кнопочке
 20230709 = o = OrdersController → отдаёт ТопПродуктов и их Счётчики вхождений в заказы
+20230710 = w = переписано ~2/3 эндпоинтов
 
 
 
