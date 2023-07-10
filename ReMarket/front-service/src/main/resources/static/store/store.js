@@ -1,6 +1,7 @@
 angular.module('market-front').controller('storeController', function ($scope, $http, $location, $localStorage) {
     const contextPath = 'http://localhost:5555/core';
     const pathToCart = 'http://localhost:5555/cart';
+    const ordersStatsPath = 'http://localhost:5555/stats/api/v1';
 
     //============================================================
     //Page<Product> findByFilter()
@@ -98,5 +99,35 @@ angular.module('market-front').controller('storeController', function ($scope, $
             });
     }
 
+
+
+    //============================================================
+    $scope.topLimitCarts=3;
+    $scope.loadTopProductsByAllCarts = function () {
+        // $http.get(ordersStatsPath + '/orders-stats/top-products-in-all-carts/' + $scope.topLimitCarts)
+        $http.get(ordersStatsPath + '/orders-stats/top-products-in-all-carts/' + 3)
+            .then(function (response) {
+                $scope.topProductsByAllCarts = response.data;
+            });
+    }
+
+    //============================================================
+    $scope.topLimitOrders=3;
+    $scope.loadTopProductsByAllOrders = function () {
+        // $http.get(ordersStatsPath + '/orders-stats/top-products-in-all-orders/' + $scope.topLimitOrders)
+        $http.get(ordersStatsPath + '/orders-stats/top-products-in-all-orders/' + 3)
+            .then(function (response) {
+                $scope.topProductsByAllOrders = response.data;
+            });
+    }
+
+
+
+
+
+
     $scope.loadProducts();
+    $scope.loadTopProductsByAllCarts();
+    $scope.loadTopProductsByAllOrders();
+
 });

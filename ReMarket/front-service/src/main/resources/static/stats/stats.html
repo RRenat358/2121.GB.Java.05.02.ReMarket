@@ -1,6 +1,9 @@
 <div>
+    <br>
 
     <h1>Статистика</h1>
+    <br>
+    <br>
     <!--============================================================-->
     <hr>
     <h3>Заказы</h3>
@@ -18,6 +21,8 @@
         </tr>
         </tbody>
     </table>
+    <br>
+    <br>
 
     <!--============================================================-->
     <hr>
@@ -36,12 +41,15 @@
         </tr>
         </tbody>
     </table>
+    <br>
+    <br>
+
 
     <!--============================================================-->
     <hr>
-    <h3>Топ продуктов из корзин всех пользователей</h3>
-    <form novalidate ng-submit="loadTopProductsByAllUsers()">
-        <input class="form-control" type="number" id="topLimit" placeholder="topLimit" ng-model="topLimit">
+    <h3>Топ продуктов из КОРЗИН всех пользователей</h3>
+    <form novalidate ng-submit="loadTopProductsByAllCarts()">
+        <input class="form-control" type="number" id="topLimitCarts" placeholder="topLimit" ng-model="topLimitCarts">
         <button type="submit" class="btn btn-outline-success">ОК</button>
     </form>
     <br>
@@ -52,12 +60,40 @@
             <td>Количество</td>
         </tr>
         <tbody>
-        <tr ng-repeat="top in topProductsByAllUsers">
+        <tr ng-repeat="top in topProductsByAllCarts">
             <td>{{top.title}}</td>
             <td>{{top.countInCart}}</td>
         </tr>
         </tbody>
     </table>
+    <br>
+    <br>
 
+    <!--============================================================-->
+    <hr>
+    <h3>Топ продуктов из ЗАКАЗОВ всех пользователей</h3>
+    <form novalidate ng-submit="loadTopProductsByAllOrders()">
+        <input class="form-control" type="number" id="topLimitOrders" placeholder="topLimit" ng-model="topLimitOrders">
+        <button type="submit" class="btn btn-outline-success">ОК</button>
+    </form>
+    <br>
 
+    <table class="table table-hover">
+        <tr>
+            <td>Продукт</td>
+            <td>Количество</td>
+        </tr>
+        <tbody>
+        <tr ng-repeat="top in topProductsByAllOrders">
+            <td>{{top.title}}</td>
+            <td>{{top.countInOrders}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+
+    <!--============================================================-->
+    <br>
+    <br>
 </div>

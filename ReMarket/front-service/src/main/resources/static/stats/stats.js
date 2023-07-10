@@ -26,11 +26,20 @@ angular.module('market-front').controller('ordersStatsController', function ($sc
     }
 
     //============================================================
-    $scope.topLimit=3;
-    $scope.loadTopProductsByAllUsers = function () {
-        $http.get(ordersStatsPath + '/orders-stats/top-products-in-all-carts/' + $scope.topLimit)
+    $scope.topLimitCarts=3;
+    $scope.loadTopProductsByAllCarts = function () {
+        $http.get(ordersStatsPath + '/orders-stats/top-products-in-all-carts/' + $scope.topLimitCarts)
             .then(function (response) {
-                $scope.topProductsByAllUsers = response.data;
+                $scope.topProductsByAllCarts = response.data;
+            });
+    }
+
+    //============================================================
+    $scope.topLimitOrders=3;
+    $scope.loadTopProductsByAllOrders = function () {
+        $http.get(ordersStatsPath + '/orders-stats/top-products-in-all-orders/' + $scope.topLimitOrders)
+            .then(function (response) {
+                $scope.topProductsByAllOrders = response.data;
             });
     }
 
@@ -40,6 +49,7 @@ angular.module('market-front').controller('ordersStatsController', function ($sc
 
     $scope.loadOrdersStats();
     $scope.loadAllOrders();
-    $scope.loadTopProductsByAllUsers();
+    $scope.loadTopProductsByAllCarts();
+    $scope.loadTopProductsByAllOrders();
 
 });
