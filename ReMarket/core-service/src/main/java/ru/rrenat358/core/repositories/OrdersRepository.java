@@ -23,7 +23,7 @@ public interface OrdersRepository extends JpaRepository<Order, Long> {
 //            @QueryHint(name = "org.hibernate.cacheable", value = "false")
 //    )
     @Query("""
-            SELECT p, COUNT(*) AS count
+            SELECT p, COUNT(*)
             FROM Product p
             INNER JOIN OrderItem oi
             ON p.id = oi.product.id
@@ -39,7 +39,7 @@ public interface OrdersRepository extends JpaRepository<Order, Long> {
             FROM Product p
             INNER JOIN OrderItem oi
             ON p.id = oi.product.id
-            GROUP BY p.id
+            GROUP BY oi.product.id
             ORDER BY COUNT(*) DESC
             """)
     List<Integer> topProductsByAllOrdersCount(Pageable pageable);

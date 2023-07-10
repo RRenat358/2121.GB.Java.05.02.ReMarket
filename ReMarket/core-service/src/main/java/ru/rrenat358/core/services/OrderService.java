@@ -74,59 +74,16 @@ public class OrderService {
     }
 
 
-    //============================================================
     public List<ProductTopInOrdersDto> topProductsByAllOrders(Integer topLimit) {
-//        List<Product> productList = new ArrayList<>();
-//        List<ProductTopInOrdersDto> productDtoList = new ArrayList<>();
-//        List<Integer> countList = new ArrayList<>();
-//
-//        productList.clear();
-//        productDtoList.clear();
-//        countList.clear();
-
-
         List<Product> productList = ordersRepository.topProductsByAllOrders(Pageable.ofSize(topLimit));
-        List<ProductTopInOrdersDto> productDtoList = entityToDtoList(productList);
-//        List<ProductTopInOrdersDto> productDtoList = productTopInOrdersConverter.entityToDtoList(productList);
-
-//        countList = topProductsCountByAllOrders(topLimit);
-//        for (int i = 0; i < topLimit; i++) {
-//            productDtoList.get(i).setCountInOrders(countList.get(i));
-//        }
-
-//        topLimit = 555;
+        List<Integer> countList = ordersRepository.topProductsByAllOrdersCount(Pageable.ofSize(topLimit));
+        List<ProductTopInOrdersDto> productDtoList = productTopInOrdersConverter.entityToDtoList(productList);
+        for (int i = 0; i < topLimit; i++) {
+            productDtoList.get(i).setCountInOrders(countList.get(i));
+        }
         return productDtoList;
     }
 
-    public List<Integer> topProductsCountByAllOrders(Integer topLimit) {
-        return ordersRepository.topProductsByAllOrdersCount(Pageable.ofSize(topLimit));
-    }
-
-
-    public List<ProductTopInOrdersDto> entityToDtoList(List<Product> productList) {
-        List<ProductTopInOrdersDto> productDtoList = productList
-                .stream()
-                .map(product -> {
-                    ProductTopInOrdersDto productDto = new ProductTopInOrdersDto();
-                    productDto.setId(product.getId());
-                    productDto.setTitle(product.getTitle());
-                    productDto.setPrice(product.getPrice());
-                    productDto.setGroupProduct(product.getGroupProduct());
-                    return productDto;
-                })
-                .collect(Collectors.toList());
-        return productDtoList;
-    }
-
-
-    //============================================================
-    public LinkedHashMap<List<Integer>, List<ProductTopInOrdersDto>> topProductsWithCountByAllOrders(Integer topLimit) {
-        List<ProductTopInOrdersDto> productTopInOrdersDtos = topProductsByAllOrders(topLimit);
-        List<Integer> countList = topProductsCountByAllOrders(topLimit);
-        LinkedHashMap<List<Integer>, List<ProductTopInOrdersDto>> map = new LinkedHashMap<>();
-        map.put(countList, productTopInOrdersDtos);
-        return map;
-    }
 
 
 }
