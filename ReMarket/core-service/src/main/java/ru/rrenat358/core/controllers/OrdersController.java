@@ -54,9 +54,9 @@ public class OrdersController {
         return orderService.getNumberOfOrdersByCurrentUser(username);
     }
 
-    @GetMapping("/top-products-in-all-orders/{topLimit}")
-    public List<ProductTopInOrdersDto> topProductsByAllOrders(@PathVariable Integer topLimit) {
-        return orderService.topProductsByAllOrders(topLimit);
+    @GetMapping("/top-products-in-all-orders/{limit}")
+    public List<ProductTopInOrdersDto> topProductsByAllOrders(@PathVariable Integer limit) {
+        return orderService.topProductsByAllOrders(limit);
     }
 
 

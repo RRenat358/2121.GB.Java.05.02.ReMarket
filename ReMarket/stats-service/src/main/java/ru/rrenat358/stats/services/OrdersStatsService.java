@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.rrenat358.api.core.OrderDto;
 import ru.rrenat358.api.core.ProductTopInCartDto;
+import ru.rrenat358.api.core.ProductTopInOrdersDto;
 import ru.rrenat358.stats.integrations.CartServiceIntegration;
 import ru.rrenat358.stats.integrations.CoreServiceIntegration;
 
@@ -37,6 +38,10 @@ public class OrdersStatsService {
 
     public Optional<ProductTopInCartDto> topProductsByAllCarts(Integer limit) {
         return cartServiceIntegration.topProductsByAllCarts(limit);
+    }
+
+    public Optional<ProductTopInOrdersDto> topProductsByAllOrders(Integer limit) {
+        return coreServiceIntegration.topProductsByAllOrders(limit);
     }
 
 

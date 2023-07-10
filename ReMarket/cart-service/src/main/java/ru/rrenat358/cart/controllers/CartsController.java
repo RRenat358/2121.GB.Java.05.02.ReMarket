@@ -53,9 +53,9 @@ public class CartsController {
         );
     }
 
-    @GetMapping("/top-products-in-all-carts/{topLimit}")
-    public Object topProductsByAllCarts(@PathVariable Integer topLimit) {
-        return cartService.topProductsByAllCarts(topLimit);
+    @GetMapping("/top-products-in-all-carts/{limit}")
+    public Object topProductsByAllCarts(@PathVariable Integer limit) {
+        return cartService.topProductsByAllCarts(limit);
     }
 
 

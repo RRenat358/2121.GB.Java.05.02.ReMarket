@@ -15,10 +15,10 @@ import java.util.Optional;
 public class CartServiceIntegration {
     private final WebClient cartServiceWebClient;
 
-    public Optional<ProductTopInCartDto> topProductsByAllCarts(Integer topLimit) {
+    public Optional<ProductTopInCartDto> topProductsByAllCarts(Integer limit) {
         Optional productDto = cartServiceWebClient.get()
 //                .uri("/api/v1/cart/top-products-by-all-users/" + topLimit)
-                .uri("/api/v1/cart/top-products-in-all-carts/" + topLimit)
+                .uri("/api/v1/cart/top-products-in-all-carts/" + limit)
                 .retrieve()
                 .onStatus(
                         httpStatus -> httpStatus.is4xxClientError(), // HttpStatus::is4xxClientError

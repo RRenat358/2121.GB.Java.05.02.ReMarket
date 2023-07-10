@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.rrenat358.api.core.OrderDto;
 import ru.rrenat358.api.core.ProductTopInCartDto;
+import ru.rrenat358.api.core.ProductTopInOrdersDto;
 import ru.rrenat358.stats.services.OrdersStatsService;
 
 import java.util.Optional;
@@ -30,6 +31,11 @@ public class OrdersStatsController {
     @GetMapping("/top-products-in-all-carts/{limit}")
     public Optional<ProductTopInCartDto> topProductsByAllCarts(@PathVariable Integer limit) {
         return ordersStatsService.topProductsByAllCarts(limit);
+    }
+
+    @GetMapping("/top-products-in-all-orders/{limit}")
+    public Optional<ProductTopInOrdersDto> topProductsByAllOrders(@PathVariable Integer limit) {
+        return ordersStatsService.topProductsByAllOrders(limit);
     }
 
 

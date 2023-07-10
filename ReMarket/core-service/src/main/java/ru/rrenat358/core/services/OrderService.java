@@ -71,11 +71,11 @@ public class OrderService {
     }
 
 
-    public List<ProductTopInOrdersDto> topProductsByAllOrders(Integer topLimit) {
-        List<Product> productList = ordersRepository.topProductsByAllOrders(Pageable.ofSize(topLimit));
-        List<Integer> countList = ordersRepository.topProductsByAllOrdersCount(Pageable.ofSize(topLimit));
+    public List<ProductTopInOrdersDto> topProductsByAllOrders(Integer limit) {
+        List<Product> productList = ordersRepository.topProductsByAllOrders(Pageable.ofSize(limit));
+        List<Integer> countList = ordersRepository.topProductsByAllOrdersCount(Pageable.ofSize(limit));
         List<ProductTopInOrdersDto> productDtoList = productTopInOrdersConverter.entityToDtoList(productList);
-        for (int i = 0; i < topLimit; i++) {
+        for (int i = 0; i < limit; i++) {
             productDtoList.get(i).setCountInOrders(countList.get(i));
         }
         return productDtoList;
