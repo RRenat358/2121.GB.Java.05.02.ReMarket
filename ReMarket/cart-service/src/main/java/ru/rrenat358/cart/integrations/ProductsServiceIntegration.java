@@ -35,18 +35,6 @@ public class ProductsServiceIntegration {
     }
 
 
-/*
-    private final RestTemplate restTemplate;
-
-    @Value("${integrations.core-service.url}")
-    private String productServiceUrl;
-
-    public Optional<ProductDto> findById(Long id) {
-        ProductDto productDto = restTemplate.getForObject(productServiceUrl + "/api/v1/products/" + id, ProductDto.class);
-        return Optional.ofNullable(productDto);
-    }
-*/
-
 
 
 }
