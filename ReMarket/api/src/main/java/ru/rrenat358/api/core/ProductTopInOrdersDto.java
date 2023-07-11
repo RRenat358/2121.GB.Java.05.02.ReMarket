@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.math.BigDecimal;
 
-@Schema(description = "Модель топ продуктов по всем заказам всех юзеров")
+@Schema(description = "Модель топ-продуктов по всем заказам всех юзеров")
 public class ProductTopInOrdersDto {
     @Schema(description = "ID продукта", required = true, example = "1")
     private Long id;

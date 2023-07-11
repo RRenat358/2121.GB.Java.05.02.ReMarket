@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import ru.rrenat358.api.core.ProductDto;
+import ru.rrenat358.api.exceptions.CartServiceAppError;
 import ru.rrenat358.api.exceptions.ResourceNotFoundException;
 import ru.rrenat358.core.converters.ProductConverter;
 import ru.rrenat358.core.entities.Product;
@@ -18,7 +19,7 @@ import ru.rrenat358.core.validators.ProductValidator;
 
 @RestController
 @RequestMapping("/api/v1/products")
-@Tag(name = "Продукты", description = "Методы работы с продуктами")
+@Tag(name = "01. Продукты", description = "Методы работы с продуктами")
 @RequiredArgsConstructor
 public class ProductsController {
 
@@ -31,6 +32,7 @@ public class ProductsController {
     //============================================================
     // GET
 
+    @GetMapping
     @Operation(
             summary = "Запрос на получение страницы продуктов",
             responses = {
@@ -40,13 +42,21 @@ public class ProductsController {
                     )
             }
     )
-    @GetMapping
     public Page<ProductDto> findByFilter(
-            @RequestParam(name = "p", defaultValue = "1") Integer page,
-            @RequestParam(name = "titlePart", required = false) String titlePart,
-            @RequestParam(name = "minPrice", required = false) Integer minPrice,
-            @RequestParam(name = "maxPrice", required = false) Integer maxPrice,
-            @RequestParam(name = "groupPart", required = false) String groupPart
+            @RequestParam (name = "p", defaultValue = "1", required = true)
+            @Parameter(description = "номер старицы листинга продуктов") Integer page,
+
+            @RequestParam (name = "titlePart", required = false)
+            @Parameter(description = "фильтр по названию продукта") String titlePart,
+
+            @RequestParam (name = "minPrice", required = false)
+            @Parameter(description = "фильтр по мин цене") Integer minPrice,
+
+            @RequestParam (name = "maxPrice", required = false)
+            @Parameter(description = "фильтр по макс цене") Integer maxPrice,
+
+            @RequestParam (name = "группа", required = false)
+            @Parameter(description = "фильтр по группе") String groupPart
     ) {
         if (page < 1) {
             page = 1;
@@ -56,23 +66,21 @@ public class ProductsController {
     }
 
 
+    @GetMapping("/{id}")
     @Operation(
-            summary = "Запрос на получение продукта по id",
+            summary = "получение продукта по id",
             responses = {
                     @ApiResponse(
                             description = "Успешный ответ", responseCode = "200",
                             content = @Content(schema = @Schema(implementation = ProductDto.class))
+                    ),
+                    @ApiResponse(
+                            description = "Ошибка пользователя", responseCode = "400",
+                            content = @Content(schema = @Schema(implementation = CartServiceAppError.class))
                     )
-//                    ,
-//                    @ApiResponse(
-//                            description = "Ошибка пользователя", responseCode = "400",
-//                            content = @Content(schema = @Schema(implementation = CartServiceAppError.class))
-//                    )
-
             }
     )
-    @GetMapping("/{id}")
-    public ProductDto findById(@PathVariable @Parameter(description = "Идентификатор продукта", required = true) Long id) {
+    public ProductDto findById(@PathVariable @Parameter(description = "id продукта", required = true) Long id) {
         Product product = productsService.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Продукт не найден для ID : " + id));
         return productConverter.entityToDto(product);
@@ -83,6 +91,10 @@ public class ProductsController {
     // POST
 
     @PostMapping
+    @Operation(
+            summary = "сохранить новый продукт в БД",
+            hidden = true
+    )
     public ProductDto saveNewProduct(@RequestBody ProductDto productDto) {
         productValidator.validate(productDto);
         Product product = productConverter.dtoToEntity(productDto);
@@ -94,12 +106,20 @@ public class ProductsController {
     // PATCH
 
     @PatchMapping("/change-price-to-delta")
-    public void changePriceToDelta(@RequestParam Long id, @RequestParam Integer delta) {
+    @Operation(
+            summary = "изменение цены продукта на дельту"
+    )
+    public void changePriceToDelta(
+            @RequestParam Long id,
+            @RequestParam @Parameter(description = "число на которое нужно изменить цену +/-", required = true) Integer delta) {
         productsService.changePriceToDelta(id, delta);
     }
 
-    // NoUsed
     @PatchMapping("/change-price")
+    @Operation(
+            summary = "замена цены продукта на другую",
+            hidden = true
+    )
     public void changePrice(@RequestParam Long id, @RequestParam Integer newPrice) {
         productsService.changePrice(id, newPrice);
     }
@@ -109,8 +129,10 @@ public class ProductsController {
 
     //============================================================
     @PutMapping
-    @Operation(hidden = true)
-    public ProductDto updateProduct(@RequestBody ProductDto productDto) {
+    @Operation(
+            summary = "изменение значения полей продукта"
+    )
+    public ProductDto updateProduct(@RequestBody @Parameter(description = "передать модель = ProductDto") ProductDto productDto) {
         productValidator.validate(productDto);
         Product product = productConverter.dtoToEntity(productDto);
         product = productsService.updateProduct(product);
@@ -130,7 +152,10 @@ public class ProductsController {
     // DELETE
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Long id) {
+    @Operation(
+            summary = "удаление из (!)БД продукта по id"
+    )
+    public void deleteById(@PathVariable @Parameter(description = "id продукта") Long id) {
         productsService.deleteById(id);
     }
 

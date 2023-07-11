@@ -1,13 +1,29 @@
 package ru.rrenat358.api.core;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 
+
+@Schema(description = "Модель 1 элемента заказа")
 public class OrderItemDto {
+
+    @Schema(description = "id продукта", required = true, example = "3")
     private Long productId;
+
+    @Schema(description = "название продукта", required = true, example = "Малина")
     private String productTitle;
+
+    @Schema(description = "количество продуктов", required = true, example = "2")
     private int quantity;
+
+    @Schema(description = "цена за 1 ед. продукта", required = true, example = "130.40")
     private BigDecimal pricePerProduct;
+
+    @Schema(description = "сумма за произведение цена*количество", required = true, example = "260.80")
     private BigDecimal price;
+
+
+
 
     public Long getProductId() {
         return productId;
