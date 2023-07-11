@@ -26,9 +26,6 @@ public class AppConfig {
     private final CartServiceIntegrationProperties cartServiceIntegrationProperties;
 
 
-//    @Value("${integrations.cart-service.url}")
-//    private String cartServiceUrl;
-
     @Bean
     public WebClient cartServiceWebClient() {
         TcpClient tcpClient = TcpClient
@@ -45,4 +42,6 @@ public class AppConfig {
                 .clientConnector(new ReactorClientHttpConnector(HttpClient.from(tcpClient)))
                 .build();
     }
+
+
 }
