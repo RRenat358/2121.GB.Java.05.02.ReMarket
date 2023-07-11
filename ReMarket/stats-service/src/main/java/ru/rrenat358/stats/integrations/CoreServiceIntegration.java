@@ -10,7 +10,6 @@ import ru.rrenat358.api.core.OrderDto;
 import ru.rrenat358.api.core.ProductTopInOrdersDto;
 import ru.rrenat358.stats.exceptions.CoreServiceIntegrationException;
 
-import java.util.List;
 import java.util.Optional;
 
 @Component
