@@ -17,7 +17,6 @@ import ru.rrenat358.core.properties.CartServiceIntegrationProperties;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
-//@PropertySource("secrets.properties")
 @EnableConfigurationProperties(
         CartServiceIntegrationProperties.class
 )

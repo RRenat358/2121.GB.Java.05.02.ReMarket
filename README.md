@@ -19,9 +19,17 @@ Frontend - angular(в минималистичном виде)
 
 \
 \
-============================================================   
+-============================================================   
 ### Swagger UI  
+
+CoreMS  
 http://localhost:8189/web-market-core/swagger-ui/index.html  
+
+CartMS  
+http://localhost:8166/web-market-carts/swagger-ui/index.html  
+
+
+
 \
 \
 ============================================================   
