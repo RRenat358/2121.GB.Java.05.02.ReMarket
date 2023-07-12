@@ -24,8 +24,7 @@ public class CartsController {
     @Operation(summary = "получить корзину")
     public CartDto getCart(
             @RequestHeader(required = false) @Parameter(description = "Имя пользователя") String username,
-            @PathVariable @Parameter(description = "uuid корзины") String uuid)
-    {
+            @PathVariable @Parameter(description = "uuid корзины") String uuid){
         return cartConverter.modelToDto(cartService.getCurrentCart(getCurrentCartUuid(username, uuid)));
     }
 
