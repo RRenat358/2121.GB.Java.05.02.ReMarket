@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 //@Data
 @Schema(description = "Модель продукта")
 public class ProductDto {
+
     @Schema(description = "ID продукта", required = true, example = "1")
     private Long id;
 
@@ -16,6 +17,7 @@ public class ProductDto {
 
     @Schema(description = "Цена продукта", required = true, example = "120.90")
     private BigDecimal price;
+
 
     public Long getId() {
         return id;

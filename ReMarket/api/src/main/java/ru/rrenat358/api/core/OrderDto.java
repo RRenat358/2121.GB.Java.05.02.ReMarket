@@ -11,7 +11,7 @@ public class OrderDto {
     @Schema(description = "id заказа", required = true, example = "1")
     private Long id;
 
-    @Schema(description = "Имя пользователя который оформляет заказ", required = true, example = "Пётр Усманов")
+    @Schema(description = "Имя пользователя который оформляет заказ", required = true, example = "Пётр")
     private String username;
 
     @Schema(description = "Стоимость заказа общая", required = true, example = "500.60")
@@ -23,8 +23,9 @@ public class OrderDto {
     @Schema(description = "Телефон для связи с клиентом (в любом формате)", required = true, example = "8 967 067 0112")
     private String phone;
 
-    @Schema(description = "Список элементов входящих в заказ", required = true, example = "[\nItemObject01,\n ItemObject02,\n ItemObject03,\n ...\n]")
+    @Schema(description = "Список элементов входящих в заказ", required = true, example = "[ ItemObject01, ItemObject02, ItemObject03, ... ]")
     private List<OrderItemDto> itemList;
+
 
 
     public Long getId() {
