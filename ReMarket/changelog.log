@@ -46,7 +46,15 @@
 ==============================
 20230711 = w = cartMS - замена RestTemplate на WebClient
 20230711 = w = all MS - Nested property = timeouts: connection: 2000...
-20230711 = o = CoreMS - Swagger
+20230712 = o = Swagger for all MS (CoreMS, CartMS, AuthMS, StatsMS)
+
+
+
+
+
+
+
+
 
 
 
