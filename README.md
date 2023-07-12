@@ -31,6 +31,9 @@ http://localhost:8166/web-market-carts/swagger-ui/index.html
 AuthMS
 http://localhost:8188/web-market-auth/swagger-ui/index.html
 
+StatsMS
+http://localhost:8167/web-market-stats/swagger-ui/index.html
+
 
 \
 \
