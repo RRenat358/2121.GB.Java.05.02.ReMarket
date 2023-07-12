@@ -10,6 +10,7 @@ Backend - java
 Frontend - angular(в минималистичном виде)  
 
 Микро-сервисная архитектура
+6 MS == 
 
 Корзина хранится в Redis
 База продуктов - в памяти
@@ -18,9 +19,22 @@ Frontend - angular(в минималистичном виде)
 
 \
 \
-============================================================   
+-============================================================   
 ### Swagger UI  
+
+CoreMS  
 http://localhost:8189/web-market-core/swagger-ui/index.html  
+
+CartMS  
+http://localhost:8166/web-market-carts/swagger-ui/index.html  
+
+AuthMS
+http://localhost:8188/web-market-auth/swagger-ui/index.html
+
+StatsMS
+http://localhost:8167/web-market-stats/swagger-ui/index.html
+
+
 \
 \
 ============================================================   

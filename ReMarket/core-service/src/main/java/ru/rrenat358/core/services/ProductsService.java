@@ -44,16 +44,10 @@ public class ProductsService {
         if (groupPart != null) {
             spec = spec.and(ProductsSpecifications.groupLike(groupPart));
         }
-
-//        log.info("--- findByFilter -------------------");
         return productsRepository.findAll(spec, pageRequest);
     }
 
 
-    // NoUsed
-    public List<Product> findAll() {
-        return productsRepository.findAll();
-    }
 
     public Optional<Product> findById(Long id) {
         return productsRepository.findById(id);

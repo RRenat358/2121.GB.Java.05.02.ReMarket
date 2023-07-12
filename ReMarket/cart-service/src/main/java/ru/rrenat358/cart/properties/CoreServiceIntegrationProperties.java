@@ -1,4 +1,4 @@
-package ru.rrenat358.stats.properties;
+package ru.rrenat358.cart.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -15,6 +15,7 @@ public class CoreServiceIntegrationProperties {
 
     @Valid
     private CoreServiceIntegrationTimeoutsProperties timeouts;
+
 
 
 }

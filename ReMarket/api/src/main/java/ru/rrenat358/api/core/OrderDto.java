@@ -1,18 +1,31 @@
 package ru.rrenat358.api.core;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.math.BigDecimal;
 import java.util.List;
 
+@Schema(description = "Модель содержания заказа")
 public class OrderDto {
+
+    @Schema(description = "id заказа", required = true, example = "1")
     private Long id;
+
+    @Schema(description = "Имя пользователя который оформляет заказ", required = true, example = "Пётр")
     private String username;
 
+    @Schema(description = "Стоимость заказа общая", required = true, example = "500.60")
     private BigDecimal totalPrice;
+
+    @Schema(description = "Адрес доставки", required = true, example = "ул. Вишнёвый пер. 3")
     private String address;
+
+    @Schema(description = "Телефон для связи с клиентом (в любом формате)", required = true, example = "8 967 067 0112")
     private String phone;
 
-
+    @Schema(description = "Список элементов входящих в заказ", required = true, example = "[ ItemObject01, ItemObject02, ItemObject03, ... ]")
     private List<OrderItemDto> itemList;
+
 
 
     public Long getId() {
