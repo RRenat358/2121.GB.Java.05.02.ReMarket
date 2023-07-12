@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 
 //@Data
-@Schema(description = "Модель продукта")
+@Schema(description = "Модель топ-N-продуктов по корзинам всех пользователей")
 public class ProductTopInCartDto {
     @Schema(description = "ID продукта", required = true, example = "1")
     private Long id;

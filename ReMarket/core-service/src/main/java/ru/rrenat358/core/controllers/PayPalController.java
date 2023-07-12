@@ -1,5 +1,6 @@
 package ru.rrenat358.core.controllers;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import ru.rrenat358.core.services.OrderService;
 import ru.rrenat358.core.services.PayPalService;
 import com.paypal.core.PayPalHttpClient;
@@ -21,6 +22,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/api/v1/paypal")
+@Tag(name = "03. PayPal", description = "Методы работы с оплатой по PayPal")
 @RequiredArgsConstructor
 public class PayPalController {
     private final PayPalHttpClient payPalClient;

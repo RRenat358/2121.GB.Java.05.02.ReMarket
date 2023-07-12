@@ -1,4 +1,4 @@
-package ru.rrenat358.core.configs;
+package ru.rrenat358.stats.configs;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -12,8 +12,8 @@ public class OpenApiConfig {
         return new OpenAPI()
                 .info(
                         new Info()
-                                .title("ReMarket / core-service ")
-                                .description("Сервис продуктов, заказов, фронтэнда и как главная основа проекта")
+                                .title("ReMarket / stats-service ")
+                                .description("Сервис статистики")
                                 .version("1")
                 );
     }

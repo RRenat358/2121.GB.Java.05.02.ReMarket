@@ -1,7 +1,13 @@
 package ru.rrenat358.api.exceptions;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 public class AppError {
+
+    @Schema(description = "Код ошибки", example = "CART_NOT_FOUND")
     private String code;
+
+    @Schema(description = "ЧПУ сообщение", example = "Корзина не найдена")
     private String message;
 
     public String getCode() {
@@ -27,4 +33,6 @@ public class AppError {
         this.code = code;
         this.message = message;
     }
+
+
 }

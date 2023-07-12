@@ -17,7 +17,6 @@ import ru.rrenat358.core.properties.CartServiceIntegrationProperties;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
-//@PropertySource("secrets.properties")
 @EnableConfigurationProperties(
         CartServiceIntegrationProperties.class
 )
@@ -26,17 +25,14 @@ public class AppConfig {
     private final CartServiceIntegrationProperties cartServiceIntegrationProperties;
 
 
-//    @Value("${integrations.cart-service.url}")
-//    private String cartServiceUrl;
-
     @Bean
     public WebClient cartServiceWebClient() {
         TcpClient tcpClient = TcpClient
                 .create()
-                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, cartServiceIntegrationProperties.getConnectTimeout())
+                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, cartServiceIntegrationProperties.getTimeouts().getConnection())
                 .doOnConnected(connection -> {
-                    connection.addHandlerLast(new ReadTimeoutHandler(cartServiceIntegrationProperties.getReadTimeout(), TimeUnit.MILLISECONDS));
-                    connection.addHandlerLast(new WriteTimeoutHandler(cartServiceIntegrationProperties.getWriteTimeout(), TimeUnit.MILLISECONDS));
+                    connection.addHandlerLast(new ReadTimeoutHandler(cartServiceIntegrationProperties.getTimeouts().getRead(), TimeUnit.MILLISECONDS));
+                    connection.addHandlerLast(new WriteTimeoutHandler(cartServiceIntegrationProperties.getTimeouts().getWrite(), TimeUnit.MILLISECONDS));
                 });
 
         return WebClient
@@ -45,4 +41,6 @@ public class AppConfig {
                 .clientConnector(new ReactorClientHttpConnector(HttpClient.from(tcpClient)))
                 .build();
     }
+
+
 }

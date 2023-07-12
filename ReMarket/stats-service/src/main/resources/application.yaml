@@ -11,14 +11,16 @@ utils:
 integrations:
   core-service:
     url: http://localhost:5555/core
-    connect-timeout: 2000
-    read-timeout: 10000
-    write-timeout: 2000
+    timeouts:
+      connection: 2000
+      read: 11000
+      write: 2000
   cart-service:
     url: http://localhost:5555/cart
-    connect-timeout: 2000
-    read-timeout: 10000
-    write-timeout: 2000
+    timeouts:
+      connection: 2000
+      read: 11000
+      write: 2000
 
 
 
