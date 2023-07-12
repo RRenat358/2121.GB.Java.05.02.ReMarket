@@ -7,39 +7,42 @@ utils:
   cart:
     prefix: SPRING_WEB_
 
-spring:
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:mydatabase;MODE=PostgreSQL
-    username: sa
-    password:
-  jpa:
-    show-sql: true
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
+#spring:
+#  datasource:
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:mem:mydatabase;MODE=PostgreSQL
+#    username: sa
+#    password:
+#  jpa:
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.H2Dialect
+
 #        cache:
 #          use_second_level_cache: false
 #          provider_class: org.hibernate.cache.NoCacheProvider
 #        <property name="hibernate.cache.use_second_level_cache" value="false" />
 #        <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider" />
-  h2:
-    console:
-      enabled: true
-      settings:
-        web-allow-others: false
 
-#spring:
-#  datasource:
-#    driver-class-name: org.postgresql.Driver
+#  h2:
+#    console:
+#      enabled: true
+#      settings:
+#        web-allow-others: false
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
 #    url: jdbc:postgresql://localhost:5433/postgres
-#    username: postgres
-#    password: postgres
-#  jpa:
-#    show-sql: true
-#    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.PostgreSQL94Dialect
+    url: jdbc:postgresql://127.0.0.1:5433/postgres
+    username: postgres
+    password: postgres
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL94Dialect
 
 integrations:
   cart-service:
