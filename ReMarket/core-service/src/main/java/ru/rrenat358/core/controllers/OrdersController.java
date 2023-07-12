@@ -32,21 +32,16 @@ public class OrdersController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @Operation(
-            summary = "оформить/создать заказ (но ещё не оплатить)"
-    )
+    @Operation(summary = "оформить/создать заказ (но ещё не оплатить)")
     public void createOrder(
             @RequestHeader String username,
-            @RequestBody OrderDetailsDto orderDetailsDto
-    ) {
+            @RequestBody OrderDetailsDto orderDetailsDto) {
         orderService.createOrder(username, orderDetailsDto);
     }
 
 
     @GetMapping
-    @Operation(
-            summary = "получить все заказы текущего пользователя"
-    )
+    @Operation(summary = "получить все заказы текущего пользователя")
     public List<OrderDto> getAllOrdersByCurrentUser(@RequestHeader @Parameter(description = "имя пользователя") String username) {
         List<Order> orderList = orderService.getAllOrdersByCurrentUser(username);
         //todo сделать конвертер листов для OrderDto
@@ -59,9 +54,7 @@ public class OrdersController {
 
 
     @GetMapping("/{id}")
-    @Operation(
-            summary = "найти заказ по id"
-    )
+    @Operation(summary = "найти заказ по id")
     public OrderDto getOrderById(@PathVariable @Parameter(description = "id заказа") Long id) {
         return orderConverter.entityToDto(orderService.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("ORDER 404")));
@@ -69,23 +62,17 @@ public class OrdersController {
 
 
     @GetMapping("/number-of-orders")
-    @Operation(
-            summary = "получить общее количество заказов текущего пользователя"
-    )
+    @Operation(summary = "получить общее количество заказов текущего пользователя")
     public Integer getNumberOfOrdersByCurrentUser(
-            @RequestHeader @Parameter(description = "имя пользователя") String username
-    ) {
+            @RequestHeader @Parameter(description = "имя пользователя") String username) {
         return orderService.getNumberOfOrdersByCurrentUser(username);
     }
 
 
     @GetMapping("/top-products-in-all-orders/{limit}")
-    @Operation(
-            summary = "топ продуктов во всех заказах всех пользователей"
-    )
+    @Operation(summary = "топ продуктов во всех заказах всех пользователей")
     public List<ProductTopInOrdersDto> topProductsByAllOrders(
-            @PathVariable @Parameter(description = "лимит на количество получаемых продуктов") Integer limit
-    ) {
+            @PathVariable @Parameter(description = "лимит на количество получаемых продуктов") Integer limit) {
         return orderService.topProductsByAllOrders(limit);
     }
 

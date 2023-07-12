@@ -106,9 +106,7 @@ public class ProductsController {
     // PATCH
 
     @PatchMapping("/change-price-to-delta")
-    @Operation(
-            summary = "изменение цены продукта на дельту"
-    )
+    @Operation(summary = "изменение цены продукта на дельту")
     public void changePriceToDelta(
             @RequestParam Long id,
             @RequestParam @Parameter(description = "число на которое нужно изменить цену +/-", required = true) Integer delta) {
@@ -129,10 +127,9 @@ public class ProductsController {
 
     //============================================================
     @PutMapping
-    @Operation(
-            summary = "изменение значения полей продукта"
-    )
-    public ProductDto updateProduct(@RequestBody @Parameter(description = "передать модель = ProductDto") ProductDto productDto) {
+    @Operation(summary = "изменение значения полей продукта")
+    public ProductDto updateProduct(
+            @RequestBody @Parameter(description = "передать модель = ProductDto") ProductDto productDto) {
         productValidator.validate(productDto);
         Product product = productConverter.dtoToEntity(productDto);
         product = productsService.updateProduct(product);
@@ -152,9 +149,7 @@ public class ProductsController {
     // DELETE
 
     @DeleteMapping("/{id}")
-    @Operation(
-            summary = "удаление из (!)БД продукта по id"
-    )
+    @Operation(summary = "удаление из (!)БД продукта по id")
     public void deleteById(@PathVariable @Parameter(description = "id продукта") Long id) {
         productsService.deleteById(id);
     }
