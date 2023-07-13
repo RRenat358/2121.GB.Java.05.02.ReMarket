@@ -3,6 +3,7 @@ server:
   servlet:
 #    context-path: /app
     context-path: /web-market-core
+
 utils:
   cart:
     prefix: SPRING_WEB_
@@ -24,7 +25,6 @@ utils:
 #          provider_class: org.hibernate.cache.NoCacheProvider
 #        <property name="hibernate.cache.use_second_level_cache" value="false" />
 #        <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider" />
-
 #  h2:
 #    console:
 #      enabled: true
@@ -43,6 +43,12 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL94Dialect
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: false
+
 
 integrations:
   cart-service:

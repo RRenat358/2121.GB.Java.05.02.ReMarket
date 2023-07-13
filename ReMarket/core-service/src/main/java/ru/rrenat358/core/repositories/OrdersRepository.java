@@ -22,6 +22,7 @@ public interface OrdersRepository extends JpaRepository<Order, Long> {
 //    @QueryHints(
 //            @QueryHint(name = "org.hibernate.cacheable", value = "false")
 //    )
+/*
     @Query("""
             SELECT p, COUNT(*)
             FROM Product p
@@ -31,6 +32,30 @@ public interface OrdersRepository extends JpaRepository<Order, Long> {
             ORDER BY COUNT(*) DESC
             """)
     List<Product> topProductsByAllOrders(Pageable pageable);
+*/
+
+/*
+    @Query("""
+            SELECT p, COUNT(*)
+            FROM Product p
+            INNER JOIN OrderItem oi
+            ON p.id = oi.product.id
+            GROUP BY oi.product.id
+            ORDER BY COUNT(*) DESC
+            """)
+    List<Product> topProductsByAllOrders(Pageable pageable);
+*/
+
+    @Query("""
+            SELECT p, COUNT(*)
+            FROM Product p
+            INNER JOIN OrderItem oi
+            ON p.id = oi.product.id
+            GROUP BY p
+            ORDER BY COUNT(*) DESC
+            """)
+    List<Product> topProductsByAllOrders(Pageable pageable);
+
 
 
 
