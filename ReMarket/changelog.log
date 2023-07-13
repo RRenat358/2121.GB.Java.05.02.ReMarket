@@ -49,7 +49,8 @@
 20230712 = o = Swagger for all MS (CoreMS, CartMS, AuthMS, StatsMS)
 20230712 = i = release-0.1.1
 ==============================
-
+20230713 = w = coreMS - замена [/h2:mem:db] на postgres в докере
+20230713 = o = переписаны sql запросы под postgres
 
 
 
