@@ -30,23 +30,6 @@ angular.module('market-front').controller('storeController', function ($scope, $
         return arr;
     }
 
-    // $scope.loadProducts = function (pageIndex = 1) {
-    //     $http({
-    //         url: contextPath + '/api/v1/products',
-    //         method: 'GET',
-    //         params: {
-    //             title_part: $scope.filter ? $scope.filter.title_part : null,
-    //             min_price: $scope.filter ? $scope.filter.min_price : null,
-    //             max_price: $scope.filter ? $scope.filter.max_price : null
-    //         }
-    //     }).then(function (response) {
-    //         $scope.ProductsPage = response.data;
-    //     });
-    // };
-
-
-
-
     //============================================================
     $scope.deleteProduct = function (productId) {
         $http.delete(contextPath + '/api/v1/products/' + productId)
@@ -98,7 +81,6 @@ angular.module('market-front').controller('storeController', function ($scope, $
     }
 
 
-
     //============================================================
     $scope.topLimitCarts=3;
     $scope.loadTopProductsByAllCarts = function () {
@@ -118,8 +100,6 @@ angular.module('market-front').controller('storeController', function ($scope, $
                 $scope.topProductsByAllOrders = response.data;
             });
     }
-
-
 
 
 
