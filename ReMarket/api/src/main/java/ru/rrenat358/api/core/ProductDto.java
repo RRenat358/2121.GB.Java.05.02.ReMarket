@@ -18,6 +18,9 @@ public class ProductDto {
     @Schema(description = "Цена продукта", required = true, example = "120.90")
     private BigDecimal price;
 
+    @Schema(description = "Группа продукта", required = true, example = "орехи")
+    private String groupProduct;
+
 
     public Long getId() {
         return id;
@@ -43,14 +46,25 @@ public class ProductDto {
         this.price = price;
     }
 
+    public String getGroupProduct() {
+        return groupProduct;
+    }
+
+    public void setGroupProduct(String groupProduct) {
+        this.groupProduct = groupProduct;
+    }
+
+
     public ProductDto() {
     }
 
-    public ProductDto(Long id, String title, BigDecimal price) {
+    public ProductDto(Long id, String title, BigDecimal price, String groupProduct) {
         this.id = id;
         this.title = title;
         this.price = price;
+        this.groupProduct = groupProduct;
     }
+
 
     @Override
     public String toString() {
