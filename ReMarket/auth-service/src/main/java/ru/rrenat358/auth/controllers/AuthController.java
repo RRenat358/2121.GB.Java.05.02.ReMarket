@@ -46,34 +46,4 @@ public class AuthController {
 
 
 
-    //============================================================
-    // saveNewUser
-/*
-    @PostMapping("/user-registration")
-    public User saveNewUser(@RequestBody User user) {
-//        Product product = productConverter.dtoToEntity(productDto);
-        user = userService.saveUser(user);
-        return user;
-//        return productConverter.entityToDto(product);
-    }
-*/
-
-/*
-
-    @PostMapping("/user-registration")
-    public void saveNewUser(@RequestParam String username, @RequestParam String password, @RequestParam String email) {
-//        Product product = productConverter.dtoToEntity(productDto);
-//        user = userService.saveUser(username, password,email);
-        ProfileDto profileDto = new ProfileDto(username, password, email);
-        userService.saveUser(profileDto);
-
-//        return user;
-//        return productConverter.entityToDto(product);
-    }
-*/
-
-    //============================================================
-
-
-
 }

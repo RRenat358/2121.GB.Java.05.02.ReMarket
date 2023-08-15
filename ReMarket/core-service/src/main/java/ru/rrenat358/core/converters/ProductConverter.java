@@ -12,11 +12,11 @@ public class ProductConverter {
 
     //============================================================
     public Product dtoToEntity(ProductDto productDto) {
-        return new Product(productDto.getId(), productDto.getTitle(), productDto.getPrice());
+        return new Product(productDto.getId(), productDto.getTitle(), productDto.getPrice(), productDto.getGroupProduct());
     }
 
     public ProductDto entityToDto(Product product) {
-        return new ProductDto(product.getId(), product.getTitle(), product.getPrice());
+        return new ProductDto(product.getId(), product.getTitle(), product.getPrice(), product.getGroupProduct());
     }
 
     //============================================================
@@ -28,6 +28,7 @@ public class ProductConverter {
                     product.setId(productDto.getId());
                     product.setTitle(productDto.getTitle());
                     product.setPrice(productDto.getPrice());
+                    product.setGroupProduct(productDto.getGroupProduct());
                     return product;
                 })
                 .collect(Collectors.toList());
@@ -42,6 +43,7 @@ public class ProductConverter {
                     productDto.setId(product.getId());
                     productDto.setTitle(product.getTitle());
                     productDto.setPrice(product.getPrice());
+                    productDto.setGroupProduct(product.getGroupProduct());
                     return productDto;
                 })
                 .collect(Collectors.toList());

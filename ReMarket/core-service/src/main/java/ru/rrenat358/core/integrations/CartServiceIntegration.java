@@ -22,17 +22,6 @@ public class CartServiceIntegration {
                 .block();
     }
 
-/*
-    public CartDto getUserCart(String username) {
-        CartDto cart = cartServiceWebClient.get()
-                .uri("/api/v1/cart/0")
-                .header("username", username)
-                .retrieve()
-                .bodyToMono(CartDto.class)
-                .block();
-        return cart;
-    }
-*/
 
     public CartDto getUserCart(String username) {
         CartDto cart = cartServiceWebClient.get()

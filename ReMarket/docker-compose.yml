@@ -1,12 +1,9 @@
 version: '3'
 
 services:
-  #  zipkin:
-  #    image: openzipkin/zipkin
-  #    ports:
-  #    - "9411:9411"
 
   postgres:
+    container_name: core-service.postgres
     image: postgres:9.6
     domainname: postgres
     ports:
@@ -29,14 +26,25 @@ services:
   #      - POSTGRES_USER=keycloak
   #      - POSTGRES_PASSWORD=keycloak
 
+  redis:
+    container_name: cart-service.redis
+    image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "6379:6379"
+  #   redis-cli flushall
+  #   redis-cli keys '*'
+
   flyway:
     image: boxfuse/flyway
     command: -url=jdbc:postgresql://postgres:5432/postgres -schemas=public -user=postgres -password=postgres -connectRetries=60 migrate
-#    volumes:
-#      - ./flyway:/flyway/sql
+    #    volumes:
+    #      - ./flyway:/flyway/sql
     depends_on:
       - postgres
 
+#  ============================================================
 #  keycloak:
 #    image: jboss/keycloak:12.0.2
 #    environment:
@@ -51,15 +59,11 @@ services:
 #    depends_on:
 #      - postgres-oauth
 
-  redis:
-    image: 'bitnami/redis:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - "6379:6379"
-#   redis-cli flushall
-#   redis-cli keys '*'
 
+#   zipkin:
+#     image: openzipkin/zipkin
+#     ports:
+#     - "9411:9411"
 
 
 

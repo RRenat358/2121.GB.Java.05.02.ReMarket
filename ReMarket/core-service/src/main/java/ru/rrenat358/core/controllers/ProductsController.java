@@ -55,7 +55,7 @@ public class ProductsController {
             @RequestParam (name = "maxPrice", required = false)
             @Parameter(description = "фильтр по макс цене") Integer maxPrice,
 
-            @RequestParam (name = "группа", required = false)
+            @RequestParam (name = "groupPart", required = false)
             @Parameter(description = "фильтр по группе") String groupPart
     ) {
         if (page < 1) {
@@ -125,7 +125,6 @@ public class ProductsController {
     //============================================================
     // PUT
 
-    //============================================================
     @PutMapping
     @Operation(summary = "изменение значения полей продукта")
     public ProductDto updateProduct(
@@ -135,15 +134,6 @@ public class ProductsController {
         product = productsService.updateProduct(product);
         return productConverter.entityToDto(product);
     }
-    // OR --------------------
-//    @PutMapping
-//    public ProductDto updateProduct2(@RequestBody ProductDto productDto) {
-//        productValidator.validate(productDto);
-//        Product product = productsService.update(productDto);
-//        return productConverter.entityToDto(product);
-//    }
-    //============================================================
-
 
     //============================================================
     // DELETE
