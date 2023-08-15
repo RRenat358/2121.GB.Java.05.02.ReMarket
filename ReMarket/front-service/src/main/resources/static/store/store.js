@@ -6,7 +6,6 @@ angular.module('market-front').controller('storeController', function ($scope, $
     //============================================================
     //Page<Product> findByFilter()
     $scope.loadProducts = function (pageIndex = 1) {
-        // console.log($scope.filter);
         $http({
             url: contextPath + '/api/v1/products',
             method: 'GET',
@@ -18,7 +17,6 @@ angular.module('market-front').controller('storeController', function ($scope, $
                 groupPart: $scope.filter ? $scope.filter.groupPart : null
             }
         }).then(function (response) {
-            // console.log(response.data);
             $scope.ProductList = response.data;
             $scope.paginationArray = $scope.generatePagesIndexes(1, $scope.ProductList.totalPages);
         });
@@ -31,23 +29,6 @@ angular.module('market-front').controller('storeController', function ($scope, $
         }
         return arr;
     }
-
-    // $scope.loadProducts = function (pageIndex = 1) {
-    //     $http({
-    //         url: contextPath + '/api/v1/products',
-    //         method: 'GET',
-    //         params: {
-    //             title_part: $scope.filter ? $scope.filter.title_part : null,
-    //             min_price: $scope.filter ? $scope.filter.min_price : null,
-    //             max_price: $scope.filter ? $scope.filter.max_price : null
-    //         }
-    //     }).then(function (response) {
-    //         $scope.ProductsPage = response.data;
-    //     });
-    // };
-
-
-
 
     //============================================================
     $scope.deleteProduct = function (productId) {
@@ -100,7 +81,6 @@ angular.module('market-front').controller('storeController', function ($scope, $
     }
 
 
-
     //============================================================
     $scope.topLimitCarts=3;
     $scope.loadTopProductsByAllCarts = function () {
@@ -120,8 +100,6 @@ angular.module('market-front').controller('storeController', function ($scope, $
                 $scope.topProductsByAllOrders = response.data;
             });
     }
-
-
 
 
 

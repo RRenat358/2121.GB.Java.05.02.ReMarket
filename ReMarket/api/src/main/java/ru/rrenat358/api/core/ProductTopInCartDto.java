@@ -63,12 +63,6 @@ public class ProductTopInCartDto {
         this.countInCart = countInCart;
     }
 
-    @Override
-    public String toString() {
-        return "{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", price=" + price +
-                '}';
-    }
+
+
 }
