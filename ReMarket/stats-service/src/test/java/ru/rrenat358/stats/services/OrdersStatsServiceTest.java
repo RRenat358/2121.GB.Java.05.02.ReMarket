@@ -39,8 +39,14 @@ class OrdersStatsServiceTest {
         assertEquals(0,r);
     }
 
+    @Test
+    void getNumberOfOrdersByCurrentUser_isUsernameEmpty_0() {
+        String usernameEmpty = "";
+        Integer r = ordersStatsService.getNumberOfOrdersByCurrentUser(usernameEmpty);
+        assertEquals(0,r);
+    }
 
-    String usernameIsBlank = " ";
+
 
 
 
