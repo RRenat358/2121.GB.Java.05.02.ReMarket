@@ -55,7 +55,6 @@ class OrdersStatsServiceTest {
         Integer r = ordersStatsService.getNumberOfOrdersByCurrentUser(usernameEmpty);
         assertEquals(0,r);
     }
-//    coreServiceIntegration.getNumberOfOrdersByCurrentUser(username)
     @Test
     void getNumberOfOrdersByCurrentUser_isUsernameExists_not0(/*@Mock CoreServiceIntegration coreServiceIntegration*/) {
         String username = "Ivan";
