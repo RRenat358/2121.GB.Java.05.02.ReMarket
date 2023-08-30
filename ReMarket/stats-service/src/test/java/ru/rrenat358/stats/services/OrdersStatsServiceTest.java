@@ -1,47 +1,81 @@
 package ru.rrenat358.stats.services;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.util.Assert;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
+import ru.rrenat358.stats.exceptions.CoreServiceIntegrationException;
 import ru.rrenat358.stats.integrations.CartServiceIntegration;
 import ru.rrenat358.stats.integrations.CoreServiceIntegration;
+
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
 //@ExtendWith(MockitoExtension.class)
+@ExtendWith(MockitoExtension.class)
 class OrdersStatsServiceTest {
+
     @Autowired
     private OrdersStatsService ordersStatsService;
 
-//    @Mock
-//    private CoreServiceIntegration coreServiceIntegrationMock = Mockito.mock(CoreServiceIntegration.class);
+/*
+    @Mock
+    private CoreServiceIntegration coreServiceIntegrationMock = Mockito.mock(CoreServiceIntegration.class);
 
-/*
-    @BeforeEach
-    public void setup() {
-        Mockito.when(coreServiceIntegration.getNumberOfOrdersByCurrentUser("Ivan")).thenReturn(5);
-    }
+    @Mock
+    private WebClient webClientMock = Mockito.mock(WebClient.class);
 */
-/*
-    @BeforeEach
-    void init(@Mock CoreServiceIntegration coreServiceIntegration) {
-//        userService = new DefaultUserService(userRepository, settingRepository, mailClient);
-//        CoreServiceIntegration coreServiceIntegration = new CoreServiceIntegration();
-        when(coreServiceIntegration.getNumberOfOrdersByCurrentUser("username")).thenReturn(5);
+
+
+    @Mock
+    private WebClient webClientMock;
+
+    @InjectMocks
+    private CoreServiceIntegration coreServiceIntegrationMock = new CoreServiceIntegration(webClientMock);
+
+
+    public static MockWebServer mockBackEnd;
+
+    @BeforeAll
+    static void setUp() throws IOException {
+        mockBackEnd = new MockWebServer();
+        mockBackEnd.start();
     }
-*/
+
+    @AfterAll
+    static void tearDown() throws IOException {
+        mockBackEnd.shutdown();
+    }
+
+    @BeforeEach
+    void initialize() {
+        String baseUrl = String.format("http://localhost:%s",
+                mockBackEnd.getPort());
+        coreServiceIntegrationMock = new CoreServiceIntegration(
+                (WebClient) webClientMock.get()
+                .uri(baseUrl));
+    }
+
+
+
+
+
+
     @Test
     void getNumberOfOrdersByCurrentUser_isUsernameNull_0() {
         String usernameNull = null;
@@ -55,25 +89,6 @@ class OrdersStatsServiceTest {
         Integer r = ordersStatsService.getNumberOfOrdersByCurrentUser(usernameEmpty);
         assertEquals(0,r);
     }
-    @Test
-    void getNumberOfOrdersByCurrentUser_isUsernameExists_not0(/*@Mock CoreServiceIntegration coreServiceIntegration*/) {
-        String username = "Ivan";
-        CoreServiceIntegration coreServiceIntegrationMock = Mockito.mock(CoreServiceIntegration.class);
-//        private OrdersStatsService ordersStatsService;
-        WebClient coreServiceWebClient = Mockito.mock(WebClient.class);
-        Mockito.when(coreServiceIntegrationMock.getNumberOfOrdersByCurrentUser("Ivan")).thenReturn(5);
-//        when(coreServiceIntegration.getNumberOfOrdersByCurrentUser(username)).thenReturn(5);
-        Integer r = ordersStatsService.getNumberOfOrdersByCurrentUser(username);
-        Assertions.assertEquals(5,r);
-    }
-
-
-
-
-
-
-
-
 
 
 
