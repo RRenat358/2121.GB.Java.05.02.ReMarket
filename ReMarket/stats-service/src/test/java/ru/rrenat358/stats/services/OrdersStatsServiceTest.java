@@ -1,98 +1,114 @@
 package ru.rrenat358.stats.services;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.util.Assert;
-import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import ru.rrenat358.api.core.OrderDto;
+import ru.rrenat358.api.core.ProductTopInCartDto;
+import ru.rrenat358.api.core.ProductTopInOrdersDto;
 import ru.rrenat358.stats.integrations.CartServiceIntegration;
 import ru.rrenat358.stats.integrations.CoreServiceIntegration;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import java.math.BigDecimal;
+import java.util.Optional;
 
 @SpringBootTest
-//@ExtendWith(MockitoExtension.class)
+@ExtendWith(MockitoExtension.class)
 class OrdersStatsServiceTest {
+
     @Autowired
     private OrdersStatsService ordersStatsService;
 
-//    @Mock
-//    private CoreServiceIntegration coreServiceIntegrationMock = Mockito.mock(CoreServiceIntegration.class);
+    @MockBean
+    private CoreServiceIntegration coreServiceIntegrationMock;
 
-/*
-    @BeforeEach
-    public void setup() {
-        Mockito.when(coreServiceIntegration.getNumberOfOrdersByCurrentUser("Ivan")).thenReturn(5);
-    }
-*/
-/*
-    @BeforeEach
-    void init(@Mock CoreServiceIntegration coreServiceIntegration) {
-//        userService = new DefaultUserService(userRepository, settingRepository, mailClient);
-//        CoreServiceIntegration coreServiceIntegration = new CoreServiceIntegration();
-        when(coreServiceIntegration.getNumberOfOrdersByCurrentUser("username")).thenReturn(5);
-    }
-*/
+    @MockBean
+    private CartServiceIntegration cartServiceIntegrationMock;
+
+    //============================================================
     @Test
     void getNumberOfOrdersByCurrentUser_isUsernameNull_0() {
         String usernameNull = null;
         Integer r = ordersStatsService.getNumberOfOrdersByCurrentUser(usernameNull);
-        assertEquals(0,r);
+        Assertions.assertEquals(0, r);
     }
 
     @Test
     void getNumberOfOrdersByCurrentUser_isUsernameEmpty_0() {
         String usernameEmpty = "";
         Integer r = ordersStatsService.getNumberOfOrdersByCurrentUser(usernameEmpty);
-        assertEquals(0,r);
+        Assertions.assertEquals(0, r);
     }
+
     @Test
-    void getNumberOfOrdersByCurrentUser_isUsernameExists_not0(/*@Mock CoreServiceIntegration coreServiceIntegration*/) {
+    void getNumberOfOrdersByCurrentUser_isUsernameExists_not0() {
         String username = "Ivan";
-        CoreServiceIntegration coreServiceIntegrationMock = Mockito.mock(CoreServiceIntegration.class);
-//        private OrdersStatsService ordersStatsService;
-        WebClient coreServiceWebClient = Mockito.mock(WebClient.class);
-        Mockito.when(coreServiceIntegrationMock.getNumberOfOrdersByCurrentUser("Ivan")).thenReturn(5);
-//        when(coreServiceIntegration.getNumberOfOrdersByCurrentUser(username)).thenReturn(5);
-        Integer r = ordersStatsService.getNumberOfOrdersByCurrentUser(username);
-        Assertions.assertEquals(5,r);
+        Mockito.when(coreServiceIntegrationMock.getNumberOfOrdersByCurrentUser("Ivan"))
+                .thenReturn(5);
+        Integer result = coreServiceIntegrationMock.getNumberOfOrdersByCurrentUser(username);
+        Assertions.assertEquals(5, result);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //============================================================
+    @Test
+    void getAllOrdersByCurrentUser_isUsernameNull_0() {
+        String usernameNull = null;
+        OrderDto expected = new OrderDto(0L, "[username]", BigDecimal.valueOf(0), "0", "0", null);
+        Optional<OrderDto> actual = ordersStatsService.getAllOrdersByCurrentUser(usernameNull);
+        Assertions.assertEquals(expected.getId(), actual.get().getId());
+        Assertions.assertEquals(expected.getUsername(), actual.get().getUsername());
+    }
 
     @Test
-    void getAllOrdersByCurrentUser() {
+    void getAllOrdersByCurrentUser_isUsernameEmpty_0() {
+        String usernameEmpty = "";
+        Optional<OrderDto> expected = Optional.ofNullable(
+                new OrderDto(0L, "[username]", BigDecimal.valueOf(0), "0", "0", null));
+        Optional<OrderDto> actual = ordersStatsService.getAllOrdersByCurrentUser(usernameEmpty);
+        Assertions.assertEquals(expected.get().getId(), actual.get().getId());
+        Assertions.assertEquals(expected.get().getUsername(), actual.get().getUsername());
     }
 
+    @Test
+    void getAllOrdersByCurrentUser_isUsernameExists_0() {
+        String username = "Ivan";
+        Optional<OrderDto> expected = Optional.ofNullable(
+                new OrderDto(555L, "Ivan", BigDecimal.valueOf(0), "0", "0", null));
+        Mockito.when(coreServiceIntegrationMock.getAllOrdersByCurrentUser("Ivan"))
+                .thenReturn(expected);
+        Optional<OrderDto> actual = ordersStatsService.getAllOrdersByCurrentUser(username);
+        Assertions.assertEquals(expected.get().getId(), actual.get().getId());
+        Assertions.assertEquals(expected.get().getUsername(), actual.get().getUsername());
+    }
+
+    //============================================================
     @Test
     void topProductsByAllCarts() {
+        Optional<ProductTopInCartDto> expected = Optional.of(
+                new ProductTopInCartDto(3L, "Банан", BigDecimal.valueOf(50.30), 8));
+        Mockito.when(cartServiceIntegrationMock.topProductsByAllCarts(2))
+                .thenReturn(expected);
+        Optional<ProductTopInCartDto> actual = ordersStatsService.topProductsByAllCarts(2);
+        Assertions.assertEquals(expected.get().getId(), actual.get().getId());
+        Assertions.assertEquals(expected.get().getTitle(), actual.get().getTitle());
     }
 
+    //============================================================
     @Test
     void topProductsByAllOrders() {
+        Optional<ProductTopInOrdersDto> expected = Optional.of(
+                new ProductTopInOrdersDto(3L, "Банан", BigDecimal.valueOf(50.30), "Фрукты", 8));
+        Mockito.when(coreServiceIntegrationMock.topProductsByAllOrders(2))
+                .thenReturn(expected);
+        Optional<ProductTopInOrdersDto> actual = ordersStatsService.topProductsByAllOrders(2);
+        Assertions.assertEquals(expected.get().getId(), actual.get().getId());
+        Assertions.assertEquals(expected.get().getTitle(), actual.get().getTitle());
     }
-
 
 
 }
