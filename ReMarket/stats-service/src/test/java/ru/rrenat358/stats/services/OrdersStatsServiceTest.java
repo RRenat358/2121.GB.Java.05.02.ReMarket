@@ -53,39 +53,34 @@ class OrdersStatsServiceTest {
 
 
     @Test
-    void getAllOrdersByCurrentUser() {
-    }
-
-    @Test
     void getAllOrdersByCurrentUser_isUsernameNull_0() {
         String usernameNull = null;
-        Optional<OrderDto> actual = ordersStatsService.getAllOrdersByCurrentUser(usernameNull);
         OrderDto expected = new OrderDto(0L, "[username]", BigDecimal.valueOf(0), "0", "0", null);
+        Optional<OrderDto> actual = ordersStatsService.getAllOrdersByCurrentUser(usernameNull);
         Assertions.assertEquals(expected.getId(), actual.get().getId());
         Assertions.assertEquals(expected.getUsername(), actual.get().getUsername());
     }
 
-
-
-/*
     @Test
     void getAllOrdersByCurrentUser_isUsernameEmpty_0() {
         String usernameEmpty = "";
-        Integer r = ordersStatsService.getAllOrdersByCurrentUser(usernameEmpty);
-        assertEquals(0,r);
+        Optional<OrderDto> expected = Optional.ofNullable(new OrderDto(0L, "[username]", BigDecimal.valueOf(0), "0", "0", null));
+        Optional<OrderDto> actual = ordersStatsService.getAllOrdersByCurrentUser(usernameEmpty);
+        Assertions.assertEquals(expected.get().getId(), actual.get().getId());
+        Assertions.assertEquals(expected.get().getUsername(), actual.get().getUsername());
     }
-*/
 
-
-/*
     @Test
     void getAllOrdersByCurrentUser_isUsernameExists_0() {
-        String usernameNull = null;
-        Optional<OrderDto> result = ordersStatsService.getAllOrdersByCurrentUser(usernameNull);
-        Optional<OrderDto> expected = new OrderDto(0L, "[username]", BigDecimal.valueOf(0), "0", "0", null);
-        Assertions.assertEquals(expected, result);
+        String username = "Ivan";
+        Optional<OrderDto> expected = Optional.ofNullable(new OrderDto(1L, "Ivan", BigDecimal.valueOf(0), "0", "0", null));
+        Mockito.when(coreServiceIntegrationMock.getAllOrdersByCurrentUser("Ivan"))
+                .thenReturn(expected);
+        Optional<OrderDto> actual = ordersStatsService.getAllOrdersByCurrentUser(username);
+        Assertions.assertEquals(expected.get().getId(), actual.get().getId());
+        Assertions.assertEquals(expected.get().getUsername(), actual.get().getUsername());
+
     }
-*/
 
 
     @Test
