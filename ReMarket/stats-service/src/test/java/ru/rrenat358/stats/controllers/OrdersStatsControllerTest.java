@@ -11,6 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import ru.rrenat358.api.core.OrderDto;
@@ -23,6 +24,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -41,8 +43,11 @@ class OrdersStatsControllerTest {
     private static final String BASE_PATH = "/api/v1/orders-stats";
 
 /*
+    https://www.baeldung.com/integration-testing-in-spring
     https://www.codejava.net/frameworks/spring-boot/unit-testing-rest-apis-tutorial
     https://www.petrikainulainen.net/programming/spring-framework/unit-testing-of-spring-mvc-controllers-rest-api/
+    https://stackoverflow.com/questions/18336277/how-to-check-string-in-response-body-with-mockmvc
+
 */
 
 
@@ -97,13 +102,7 @@ class OrdersStatsControllerTest {
     }
 
 
-
     //============================================================
-/*
-    @Test
-    void getAllOrdersByCurrentUser() {
-    }
-*/
     @Test
     void getAllOrdersByCurrentUser_isUsernameNull_0() throws Exception {
         String username = null;
@@ -117,69 +116,71 @@ class OrdersStatsControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(jsonPath("$", is(orderDtoList)))
-                .andDo(print())
-        ;
+                .andDo(print());
     }
-
-//    public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(), MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
-    public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(), MediaType.APPLICATION_JSON.getSubtype());
 
 
     @Test
     void getAllOrdersByCurrentUser_isUsernameNull_0_2() throws Exception {
         String username = null;
-        OrderDto orderDtoList = new OrderDto(0L, "[username]", BigDecimal.valueOf(0), "0", "0", null);
+        OrderDto expectedOrderDtoList = new OrderDto(0L, "[username]", BigDecimal.valueOf(0), "0", "0", null);
 
-        System.out.println(orderDtoList.getId());
-        System.out.println(orderDtoList.getUsername());
-        System.out.println(orderDtoList.getTotalPrice());
+        Mockito.when(ordersStatsService.getAllOrdersByCurrentUser(username))
+                .thenReturn(Optional.of(expectedOrderDtoList));
 
+        this.mockMvc
+                .perform(MockMvcRequestBuilders.get(BASE_PATH + "/all-orders"))
+                .andDo(print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("[username]"))
+                .andReturn();
+/*
+        this.mockMvc
+                .perform(get(BASE_PATH + "/all-orders"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$.username").value("[username]"))
+                ;
+*/
+    }
+
+    @Test
+    void getAllOrdersByCurrentUser_isUsernameNull_0_3() throws Exception {
+        String username = null;
+        OrderDto expectedOrderDtoList = new OrderDto(0L, "[username]", BigDecimal.valueOf(0), "0", "0", null);
+        OrderDto expectedOrderDtoList2 = new OrderDto(3L, "Ivan", BigDecimal.valueOf(0), "0", "0", null);
 
 //        OrderDto expected = new OrderDto(0L, "[username]", BigDecimal.valueOf(0), "0", "0", null);
 //        Optional<OrderDto> actual = ordersStatsService.getAllOrdersByCurrentUser(username);
 
         Mockito.when(ordersStatsService.getAllOrdersByCurrentUser(username))
-                .thenReturn(Optional.of(orderDtoList));
+                .thenReturn(Optional.of(expectedOrderDtoList));
+
+//        Mockito.when(ordersStatsService.getAllOrdersByCurrentUser("Ivan"))
+//                .thenReturn(Optional.of(expectedOrderDtoList2));
+
 /*
         Optional<OrderDto> orderDtoList2 = Mockito.when(ordersStatsService.getAllOrdersByCurrentUser(username))
                 .thenReturn(orderDtoList);
 */
-
-// https://stackoverflow.com/questions/18336277/how-to-check-string-in-response-body-with-mockmvc
 /*
-        MvcResult result = mockMvc.perform(get(BASE_PATH + "/all-orders").header("username", "").contentType(MediaType.APPLICATION_JSON)
-                        .content(String.valueOf(orderDtoList)))
-                .andDo(MockMvcResultHandlers.print())
+        mockMvc
+                .perform(get(BASE_PATH + "/all-orders")
+//                        .header("username", "")
+                )
                 .andExpect(status().isOk())
-                .andReturn();
-
-        String content = result.getResponse().getContentAsString();
-*/
-
-
-        mockMvc.perform(get(BASE_PATH + "/all-orders")
-                        .header("username", ""))
-
-                .andExpect(status().isOk())
-
-//                .andExpect(content().contentType("application/json"))
-//                .andExpect(content().contentType(APPLICATION_JSON_UTF8))
-//                .andExpect(jsonPath("$.data.id", is(0L)))
-                .andExpect(content().json("{'id':'0L'}"))
-//                .andExpect(jsonPath("$['id']", is(0L)))
-//                .andExpect(jsonPath("[0].id", is(0L)))
+                .andExpect(content().contentType("application/json"))
 //                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(0L))
-//                .andExpect(jsonPath("$.username", is("[username]")))
+                .andExpect(jsonPath("$.username").value("[username]"))
+                .andDo(print());
+*/
+        this.mockMvc
+                .perform(MockMvcRequestBuilders.get(BASE_PATH + "/all-orders"))
                 .andDo(print())
-                .andReturn().getResponse().getContentAsString()
-
-        ;
-
-
-
-
-
-
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("[username]"))
+                .andReturn();
     }
 
     @Test
@@ -202,14 +203,11 @@ class OrdersStatsControllerTest {
     }
 
 
-
     //============================================================
 
     @Test
     void topProductsByAllOrders() {
     }
-
-
 
 
 }
