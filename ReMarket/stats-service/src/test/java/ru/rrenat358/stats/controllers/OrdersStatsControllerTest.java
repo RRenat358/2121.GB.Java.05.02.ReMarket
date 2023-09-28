@@ -60,7 +60,8 @@ class OrdersStatsControllerTest {
                 .thenReturn(0);
 
         mockMvc.perform(get(BASE_PATH + "/number-of-orders-by-user")
-                        .header("username", ""))
+//                        .header("username", null)
+                )
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(jsonPath("$", is(0)))
@@ -80,7 +81,7 @@ class OrdersStatsControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(jsonPath("$", is(0)))
-                .andDo(print())
+//                .andDo(print())
         ;
     }
 
@@ -97,7 +98,7 @@ class OrdersStatsControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(jsonPath("$", is(5)))
-//                .andDo(print())
+                .andDo(print())
         ;
     }
 
@@ -112,87 +113,48 @@ class OrdersStatsControllerTest {
                 .thenReturn(Optional.of(orderDtoList));
 
         mockMvc.perform(get(BASE_PATH + "/all-orders")
-                        .header("username", ""))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType("application/json"))
-                .andExpect(jsonPath("$", is(orderDtoList)))
-                .andDo(print());
-    }
-
-
-    @Test
-    void getAllOrdersByCurrentUser_isUsernameNull_0_2() throws Exception {
-        String username = null;
-        OrderDto expectedOrderDtoList = new OrderDto(0L, "[username]", BigDecimal.valueOf(0), "0", "0", null);
-
-        Mockito.when(ordersStatsService.getAllOrdersByCurrentUser(username))
-                .thenReturn(Optional.of(expectedOrderDtoList));
-
-        this.mockMvc
-                .perform(MockMvcRequestBuilders.get(BASE_PATH + "/all-orders"))
-                .andDo(print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("[username]"))
-                .andReturn();
-/*
-        this.mockMvc
-                .perform(get(BASE_PATH + "/all-orders"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().contentType("application/json"))
-                .andExpect(jsonPath("$.username").value("[username]"))
-                ;
-*/
-    }
-
-    @Test
-    void getAllOrdersByCurrentUser_isUsernameNull_0_3() throws Exception {
-        String username = null;
-        OrderDto expectedOrderDtoList = new OrderDto(0L, "[username]", BigDecimal.valueOf(0), "0", "0", null);
-        OrderDto expectedOrderDtoList2 = new OrderDto(3L, "Ivan", BigDecimal.valueOf(0), "0", "0", null);
-
-//        OrderDto expected = new OrderDto(0L, "[username]", BigDecimal.valueOf(0), "0", "0", null);
-//        Optional<OrderDto> actual = ordersStatsService.getAllOrdersByCurrentUser(username);
-
-        Mockito.when(ordersStatsService.getAllOrdersByCurrentUser(username))
-                .thenReturn(Optional.of(expectedOrderDtoList));
-
-//        Mockito.when(ordersStatsService.getAllOrdersByCurrentUser("Ivan"))
-//                .thenReturn(Optional.of(expectedOrderDtoList2));
-
-/*
-        Optional<OrderDto> orderDtoList2 = Mockito.when(ordersStatsService.getAllOrdersByCurrentUser(username))
-                .thenReturn(orderDtoList);
-*/
-/*
-        mockMvc
-                .perform(get(BASE_PATH + "/all-orders")
-//                        .header("username", "")
+//                        .header("username", null)
                 )
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(0L))
                 .andExpect(jsonPath("$.username").value("[username]"))
                 .andDo(print());
-*/
-        this.mockMvc
-                .perform(MockMvcRequestBuilders.get(BASE_PATH + "/all-orders"))
-                .andDo(print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("[username]"))
-                .andReturn();
     }
 
+
     @Test
-    void getAllOrdersByCurrentUser_isUsernameEmpty_0() {
+    void getAllOrdersByCurrentUser_isUsernameEmpty_0() throws Exception {
+        String username = "";
+        OrderDto expectedOrderDtoList = new OrderDto(0L, "[username]", BigDecimal.valueOf(0), "0", "0", null);
 
+        Mockito.when(ordersStatsService.getAllOrdersByCurrentUser(username))
+                .thenReturn(Optional.of(expectedOrderDtoList));
 
+        mockMvc.perform(get(BASE_PATH + "/all-orders")
+                        .header("username", "")
+                )
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$.username").value("[username]"))
+                .andDo(print());
     }
 
+
     @Test
-    void getAllOrdersByCurrentUser_isUsernameExists_not0() {
+    void getAllOrdersByCurrentUser_isUsernameExists_not0() throws Exception {
+        String username = "Ivan";
+        OrderDto expectedOrderDtoList = new OrderDto(3L, username, BigDecimal.valueOf(100), "Voronezh", "+79670670112", null);
 
+        Mockito.when(ordersStatsService.getAllOrdersByCurrentUser(username))
+                .thenReturn(Optional.of(expectedOrderDtoList));
 
+        mockMvc.perform(get(BASE_PATH + "/all-orders")
+                        .header("username", username)
+                )
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$.username").value(username))
+                .andDo(print());
     }
 
 
